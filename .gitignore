@@ -1,5 +1,5 @@
 node_modules
-dist
-functions
+public
 .env
 yarn-error.log
+.cache
