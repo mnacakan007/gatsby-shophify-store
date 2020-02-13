@@ -1,6 +1,8 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
 import { graphql } from 'gatsby';
-import Image from 'gatsby-image';
+import Layout from '../components/layout';
+import ProductCard from '../components/product-card';
 
 export const query = graphql`
   {
@@ -8,6 +10,7 @@ export const query = graphql`
       filter: { variants: { elemMatch: { availableForSale: { eq: true } } } }
     ) {
       nodes {
+        id
         title
         productType
         description
@@ -17,13 +20,13 @@ export const query = graphql`
           image {
             localFile {
               childImageSharp {
-                fixed(
-                  width: 100
-                  height: 100
+                fluid(
+                  maxWidth: 1600
+                  maxHeight: 900
                   fit: COVER
-                  cropFocus: ATTENTION
+                  cropFocus: CENTER
                 ) {
-                  ...GatsbyImageSharpFixed_withWebp_tracedSVG
+                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
             }
@@ -39,33 +42,20 @@ export const query = graphql`
   }
 `;
 
-const Product = ({ product }) => {
-  return (
-    <div>
-      <h2>{product.title}</h2>
-      <p>{product.productType}</p>
-      <p>{product.description}</p>
-      <ul>
-        {product.tags.map(tag => (
-          <li key={`tag-${tag}`}>{tag}</li>
-        ))}
-      </ul>
-      <Image
-        fixed={product.variants[0].image.localFile.childImageSharp.fixed}
-        alt={product.title}
-      />
-      {product.variants.length > 1 &&
-        product.variants.map(variant => <p>Option: {variant.title}</p>)}
-    </div>
-  );
-};
-
 export default ({ data }) => (
-  <>
-    <h1>Hello world!</h1>
-    {data.allShopifyProduct.nodes.map(product => (
-      <Product key={product.id} product={product} />
-    ))}
-    <pre>{JSON.stringify(data, null, 2)}</pre>
-  </>
+  <Layout>
+    <div
+      sx={{
+        mx: 'auto',
+        maxWidth: '90vw',
+        display: 'grid',
+        gridGap: '1rem',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))'
+      }}
+    >
+      {data.allShopifyProduct.nodes.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  </Layout>
 );
