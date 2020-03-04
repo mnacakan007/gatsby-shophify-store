@@ -8,7 +8,7 @@ const BuyButton = ({ variants }) => {
 
   const formatted = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: lowestPrice.currencyCode
+    currency: lowestPrice.currencyCode,
   }).format(lowestPrice.amount);
 
   return (
@@ -19,7 +19,7 @@ const BuyButton = ({ variants }) => {
         border: 0,
         borderRadius: 6,
         fontWeight: 600,
-        p: '8px'
+        p: '8px',
       }}
     >
       {variants.length > 1 ? `Buy from ${formatted}` : `Buy for ${formatted}`}
@@ -37,12 +37,15 @@ const ProductCard = ({ product }) => {
         bg: 'white',
         border: '5px solid white',
         borderRadius: 8,
-        boxShadow: t => `0 4px 4px ${t.colors.grayDarkAlpha}`,
+        boxShadow: t => `
+          0 0 0 1px ${t.colors.grayDarkAlpha},
+          0 4px 4px ${t.colors.grayDarkAlpha}
+        `,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         mb: '1rem',
-        pb: '0.75rem'
+        pb: '0.75rem',
       }}
     >
       <Image
@@ -51,7 +54,7 @@ const ProductCard = ({ product }) => {
         sx={{
           width: '100%',
           borderTopRightRadius: 8,
-          borderTopLeftRadius: 8
+          borderTopLeftRadius: 8,
         }}
       />
       <h2 sx={{ color: 'heading', m: 0, p: '8px' }}>{product.title}</h2>
@@ -62,7 +65,7 @@ const ProductCard = ({ product }) => {
           gridTemplateColumns: 'repeat(2, 1fr)',
           alignItems: 'baseline',
           mt: 'auto',
-          px: '8px'
+          px: '8px',
         }}
       >
         <BuyButton variants={product.variants} />
@@ -78,17 +81,25 @@ const ProductCard = ({ product }) => {
           position: 'absolute',
           top: '0.25rem',
           right: '0.25rem',
-          bg: 'background',
+          bg: 'red',
           color: 'white',
           fontSize: '0.75rem',
           lineHeight: 1,
           m: 0,
           p: 1,
           borderRadius: 6,
-          fontWeight: 'bold'
-          // '&[data-type="stickers"]': {
-          //   bg: 'red'
-          // }
+          fontWeight: 'bold',
+
+          // TODO make this suck WAY less
+          '&[data-type="stickers"]': {
+            bg: 'blue',
+          },
+          '&[data-type="t-shirt"]': {
+            bg: 'purple',
+          },
+          '&[data-type="tote bag"]': {
+            bg: 'darkorange',
+          },
         }}
         data-type={product.productType}
       >
