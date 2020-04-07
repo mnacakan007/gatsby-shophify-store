@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
+import { Link } from 'gatsby';
 import Image from 'gatsby-image';
 
 const BuyButton = ({ variants }) => {
@@ -18,8 +19,11 @@ const BuyButton = ({ variants }) => {
         bg: '#e9ebeb',
         border: 0,
         borderRadius: 6,
+        fontSize: '16px',
         fontWeight: 600,
-        p: '8px',
+        py: '6px',
+        px: '8px',
+        width: 'auto',
       }}
     >
       {variants.length > 1 ? `Buy from ${formatted}` : `Buy for ${formatted}`}
@@ -37,7 +41,7 @@ const ProductCard = ({ product }) => {
         bg: 'white',
         border: '5px solid white',
         borderRadius: 8,
-        boxShadow: t => `
+        boxShadow: (t) => `
           0 0 0 1px ${t.colors.grayDarkAlpha},
           0 4px 4px ${t.colors.grayDarkAlpha}
         `,
@@ -48,33 +52,51 @@ const ProductCard = ({ product }) => {
         pb: '0.75rem',
       }}
     >
-      <Image
-        fluid={product.variants[0].image.localFile.childImageSharp.fluid}
-        alt={product.title}
-        sx={{
-          width: '100%',
-          borderTopRightRadius: 8,
-          borderTopLeftRadius: 8,
-        }}
-      />
-      <h2 sx={{ color: 'heading', m: 0, p: '8px' }}>{product.title}</h2>
+      <Link to={`/product/${product.slug}`}>
+        <Image
+          fluid={product.variants[0].image.localFile.childImageSharp.fluid}
+          alt={product.title}
+          sx={{
+            width: '100%',
+            borderTopRightRadius: 8,
+            borderTopLeftRadius: 8,
+          }}
+        />
+      </Link>
+      <h2 sx={{ color: 'heading', m: 0, p: '8px' }}>
+        <Link
+          sx={{ color: 'inherit', textDecoration: 'none' }}
+          to={`/product/${product.slug}`}
+        >
+          {product.title}
+        </Link>
+      </h2>
       <p sx={{ m: 0, mb: '8px', px: '8px' }}>{product.description}</p>
       <div
         sx={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gridTemplateColumns: '180px 1fr',
           alignItems: 'baseline',
           mt: 'auto',
+          pt: '8px',
           px: '8px',
         }}
       >
-        <BuyButton variants={product.variants} />
-        <a
-          sx={{ color: 'link', textAlign: 'center', textDecoration: 'none' }}
+        <div>
+          <BuyButton variants={product.variants} />
+        </div>
+        <Link
+          to={`/product/${product.slug}`}
+          sx={{
+            color: 'link',
+            fontSize: 14,
+            textAlign: 'center',
+            textDecoration: 'none',
+          }}
           href="#TODO-product-detail-page"
         >
-          details &rarr;
-        </a>
+          Details &rarr;
+        </Link>
       </div>
       <p
         sx={{
@@ -89,6 +111,7 @@ const ProductCard = ({ product }) => {
           p: 1,
           borderRadius: 6,
           fontWeight: 'bold',
+          textTransform: 'capitalize',
 
           // TODO make this suck WAY less
           '&[data-type="stickers"]': {

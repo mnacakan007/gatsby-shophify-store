@@ -4,7 +4,7 @@ import { useMachine } from '@xstate/react';
 import { Machine } from 'xstate';
 import { Fragment, forwardRef, useRef, useCallback } from 'react';
 
-const TRANSITION_LENGTH = 500;
+const TRANSITION_LENGTH = 200;
 
 const cartMachine = Machine({
   id: 'cart',
@@ -12,51 +12,51 @@ const cartMachine = Machine({
   states: {
     closed: {
       on: {
-        OPEN: 'opening'
-      }
+        OPEN: 'opening',
+      },
     },
     opening: {
       invoke: {
         src: 'openCartAnimation',
         onDone: 'open',
-        onError: 'error'
-      }
+        onError: 'error',
+      },
     },
     open: {
       on: {
-        CLOSE: 'closing'
-      }
+        CLOSE: 'closing',
+      },
     },
     closing: {
       invoke: {
         src: 'closeCartAnimation',
         onDone: 'closed',
-        onError: 'error'
-      }
+        onError: 'error',
+      },
     },
     error: {
       on: {
-        RESET: 'closed'
-      }
-    }
-  }
+        RESET: 'closed',
+      },
+    },
+  },
 });
 
 const CartWrapper = forwardRef(({ state }, ref) => (
   <div
     ref={ref}
     sx={{
+      bg: 'white',
+      color: 'text',
       display: 'block',
-      bg: 'red',
       height: '100vh',
-      width: 200,
       position: 'absolute',
-      top: 0,
       right: 0,
-      color: 'white',
+      top: 0,
+      transform: 'translateX(300px)',
+      transition: `transform ${TRANSITION_LENGTH}ms ease-in-out`,
+      width: 300,
       zIndex: 100,
-      transform: 'translatex(200px)',
-      transition: `transform ${TRANSITION_LENGTH}ms ease-in-out`
     }}
   >
     Cart! {state}
@@ -75,24 +75,24 @@ const Cart = () => {
           reject(err);
         }
       }),
-    [cartRef]
+    [cartRef],
   );
 
   const closeCartAnimation = useCallback(
     () =>
       new Promise((resolve, reject) => {
         try {
-          cartRef.current.style.transform = 'translateX(200px)';
+          cartRef.current.style.transform = 'translateX(300px)';
           setTimeout(() => resolve(true), TRANSITION_LENGTH);
         } catch (err) {
           reject(err);
         }
       }),
-    [cartRef]
+    [cartRef],
   );
 
   const [state, send] = useMachine(cartMachine, {
-    services: { openCartAnimation, closeCartAnimation }
+    services: { openCartAnimation, closeCartAnimation },
   });
 
   if (state.matches('error')) {

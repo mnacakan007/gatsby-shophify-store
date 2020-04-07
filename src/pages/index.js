@@ -12,6 +12,7 @@ export const query = graphql`
       nodes {
         id
         title
+        slug
         productType
         description
         tags
@@ -43,17 +44,17 @@ export const query = graphql`
 `;
 
 export default ({ data }) => (
-  <Layout>
+  <Layout home>
     <div
       sx={{
         mx: 'auto',
         maxWidth: '90vw',
         display: 'grid',
         gridGap: '1rem',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))'
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
       }}
     >
-      {data.allShopifyProduct.nodes.map(product => (
+      {data.allShopifyProduct.nodes.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
