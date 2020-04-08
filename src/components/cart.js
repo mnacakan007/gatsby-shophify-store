@@ -3,6 +3,7 @@ import { jsx } from 'theme-ui';
 import { useMachine } from '@xstate/react';
 import { Machine } from 'xstate';
 import { Fragment, forwardRef, useRef, useCallback } from 'react';
+import { useCart } from '../context/cart-context';
 
 const TRANSITION_LENGTH = 200;
 
@@ -42,31 +43,46 @@ const cartMachine = Machine({
   },
 });
 
-const CartWrapper = forwardRef(({ state }, ref) => (
-  <div
-    ref={ref}
-    sx={{
-      bg: 'white',
-      boxShadow: (t) => `
-        0 0 0 1px ${t.colors.grayDarkAlpha},
-        0 4px 4px ${t.colors.grayDarkAlpha},
-        -4px 4px 8px ${t.colors.grayDarkAlpha}
-      `,
-      color: 'text',
-      display: 'block',
-      height: '100vh',
-      position: 'absolute',
-      right: 0,
-      top: 0,
-      transform: 'translateX(320px)',
-      transition: `transform ${TRANSITION_LENGTH}ms ease-in-out`,
-      width: 300,
-      zIndex: 100,
-    }}
-  >
-    Cart! {state}
-  </div>
-));
+const CartWrapper = forwardRef(({ state }, ref) => {
+  const { checkout } = useCart();
+
+  // if (!checkout || !checkout.lineItems) {
+  //   console.log('oof');
+  //   return <p>nope</p>;
+  // }
+
+  // console.log({ lineItems: checkout.lineItems });
+
+  return (
+    <div
+      ref={ref}
+      sx={{
+        bg: 'white',
+        boxShadow: (t) => `
+          0 0 0 1px ${t.colors.grayDarkAlpha},
+          0 4px 4px ${t.colors.grayDarkAlpha},
+          -4px 4px 8px ${t.colors.grayDarkAlpha}
+        `,
+        color: 'text',
+        display: 'block',
+        height: '100vh',
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        transform: 'translateX(320px)',
+        transition: `transform ${TRANSITION_LENGTH}ms ease-in-out`,
+        width: 300,
+        zIndex: 100,
+      }}
+    >
+      {JSON.stringify(
+        { checkout: checkout ? checkout.lineItems : [] },
+        null,
+        2,
+      )}
+    </div>
+  );
+});
 
 const Cart = () => {
   const cartRef = useRef();

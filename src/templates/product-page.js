@@ -37,7 +37,7 @@ export const query = graphql`
 `;
 
 const ProductPage = ({ data }) => {
-  const { addItem } = useCart();
+  const { checkout } = useCart();
   const product = data.shopifyProduct;
   const needsSizing = product.variants.length > 1;
 
@@ -47,14 +47,17 @@ const ProductPage = ({ data }) => {
     const data = new FormData(event.target);
 
     console.log({
+      checkout,
       id: data.get('shopifyId'),
       quantity: data.get('quantity'),
     });
 
-    addItem({
-      id: data.get('shopifyId'),
-      quantity: data.get('quantity'),
-    });
+    checkout.addLineItems([
+      {
+        variantId: data.get('shopifyId'),
+        quantity: data.get('quantity'),
+      },
+    ]);
   };
 
   return (

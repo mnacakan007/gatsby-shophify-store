@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, /* useContext, */ useReducer } from 'react';
 import Shopify from 'shopify-buy';
 
 const client = Shopify.buildClient({
@@ -10,10 +10,14 @@ let SHOPIFY_CHECKOUT;
 
 async function initializeCheckout() {
   return new Promise((resolve, reject) => {
+    if (SHOPIFY_CHECKOUT) resolve(SHOPIFY_CHECKOUT);
+
     const isBrowser = typeof window !== 'undefined';
     const existingCheckoutID = isBrowser
       ? localStorage.getItem('shopify_checkout_id')
       : null;
+
+    console.log({ existingCheckoutID });
 
     const setCheckoutInState = (checkout) => {
       if (isBrowser) {
@@ -25,18 +29,22 @@ async function initializeCheckout() {
     };
 
     if (existingCheckoutID && existingCheckoutID !== 'null') {
+      console.log('loading existing checkout');
       client.checkout
         .fetch(existingCheckoutID)
         .then((checkout) => {
           if (!checkout.completedAt) {
+            console.log('existing checkout found!');
             setCheckoutInState(checkout);
           }
         })
         .catch((err) => {
           console.error('something went wrong; bailing');
+          console.error(err);
           localStorage.removeItem('shopify_checkout_id');
           reject('error creating a checkout');
         });
+      return;
     }
 
     console.log('creating a new checkout');
@@ -44,44 +52,30 @@ async function initializeCheckout() {
     client.checkout
       .create()
       .then((checkout) => setCheckoutInState(checkout))
-      .catch((e) => console.error(e));
+      .catch((e) => reject(e));
   });
 }
 
-const reducer = async (cart, action) => {
+const reducer = (cart, action) => {
   console.log({ cart, action });
-  if (!SHOPIFY_CHECKOUT) {
-    console.log('no checkout found');
-    await initializeCheckout();
-  }
+
+  // const prepItem = ({ id, quantity }) => [
+  //   {
+  //     variantId: id,
+  //     quantity: parseInt(quantity, 10),
+  //   },
+  // ];
 
   switch (action.type) {
-    case 'ADD_CART_ITEM':
-      const updated = await client.checkout.addLineItems(SHOPIFY_CHECKOUT.id, [
-        {
-          variantId: action.id,
-          quantity: parseInt(action.quantity, 10),
-        },
-      ]);
+    case 'UPDATE_CART':
+      return cart;
 
-      console.log(updated.lineItems);
-    // return cart.concat({
-    //   sku: action.sku,
-    //   quantity: action.quantity,
-    // });
+    case 'DELETE_CART_ITEM':
+      return cart;
 
-    // case 'DELETE_CART_ITEM':
-    //   return cart.filter((item) => item.sku !== action.sku);
+    case 'UPDATE_ITEM_QUANTITY':
+      return cart;
 
-    // case 'UPDATE_ITEM_QUANTITY':
-    //   return cart.map((item) => {
-    //     if (item.sku !== action.sku) return item;
-
-    //     return {
-    //       sku: item.sku,
-    //       quantity: action.quantity,
-    //     };
-    //   });
     default:
       return cart;
   }
@@ -90,18 +84,20 @@ const reducer = async (cart, action) => {
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => (
-  <CartContext.Provider value={useReducer(reducer, [])}>
+  <CartContext.Provider value={useReducer(reducer, new Map())}>
     {children}
   </CartContext.Provider>
 );
 
-export const useCart = () => {
-  const [cart, dispatch] = useContext(CartContext);
+export const useCart = async () => {
+  if (!SHOPIFY_CHECKOUT) {
+    console.log('no checkout found');
+    await initializeCheckout();
+  }
+  // const [cartSet, dispatch] = useContext(CartContext);
 
-  const addItem = (item) => dispatch({ type: 'ADD_CART_ITEM', ...item });
-  // const updateQuantity = (item) =>
-  //   dispatch({ type: 'UPDATE_ITEM_QUANTITY', item });
+  // const updateCart = (item) => dispatch({ type: 'UPDATE_CART', ...item });
   // const deleteItem = (sku) => dispatch({ type: 'DELETE_ITEM', sku });
 
-  return { cart, addItem /* updateQuantity, deleteItem */ };
+  return { checkout: SHOPIFY_CHECKOUT /* , updateCart, deleteItem  */ };
 };
