@@ -52,12 +52,12 @@ const ProductPage = ({ data }) => {
       quantity: data.get('quantity'),
     });
 
-    checkout.addLineItems([
-      {
-        variantId: data.get('shopifyId'),
-        quantity: data.get('quantity'),
-      },
-    ]);
+    // checkout.addLineItems([
+    //   {
+    //     variantId: data.get('shopifyId'),
+    //     quantity: data.get('quantity'),
+    //   },
+    // ]);
   };
 
   return (

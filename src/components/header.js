@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
 import { Link } from 'gatsby';
-import Cart from './cart';
+// import Cart from './cart';
 import logo from '../assets/netlify-swag-logo.svg';
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
       <Link to="/">
         <img src={logo} alt="Netlify Swag" />
       </Link>
-      <Cart />
+      {/* <Cart /> */}
     </header>
   );
 };
