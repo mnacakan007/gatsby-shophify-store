@@ -1,4 +1,6 @@
-require('dotenv').config();
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 
 module.exports = {
   plugins: [
@@ -9,18 +11,18 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'pages',
-        path: 'src/pages'
-      }
+        path: 'src/pages',
+      },
     },
     {
       resolve: 'gatsby-source-shopify',
       options: {
         shopName: 'netlify',
         // get this: https://netlify.myshopify.com/admin/apps/private
-        accessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+        accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_API_TOKEN,
         apiVersion: '2020-01',
-        includeCollections: ['shop']
-      }
-    }
-  ]
+        includeCollections: ['shop'],
+      },
+    },
+  ],
 };

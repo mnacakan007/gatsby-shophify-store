@@ -47,13 +47,18 @@ const CartWrapper = forwardRef(({ state }, ref) => (
     ref={ref}
     sx={{
       bg: 'white',
+      boxShadow: (t) => `
+        0 0 0 1px ${t.colors.grayDarkAlpha},
+        0 4px 4px ${t.colors.grayDarkAlpha},
+        -4px 4px 8px ${t.colors.grayDarkAlpha}
+      `,
       color: 'text',
       display: 'block',
       height: '100vh',
       position: 'absolute',
       right: 0,
       top: 0,
-      transform: 'translateX(300px)',
+      transform: 'translateX(320px)',
       transition: `transform ${TRANSITION_LENGTH}ms ease-in-out`,
       width: 300,
       zIndex: 100,
@@ -82,7 +87,7 @@ const Cart = () => {
     () =>
       new Promise((resolve, reject) => {
         try {
-          cartRef.current.style.transform = 'translateX(300px)';
+          cartRef.current.style.transform = 'translateX(320px)';
           setTimeout(() => resolve(true), TRANSITION_LENGTH);
         } catch (err) {
           reject(err);

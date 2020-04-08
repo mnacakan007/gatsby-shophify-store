@@ -3,6 +3,8 @@ import { jsx } from 'theme-ui';
 import { Link } from 'gatsby';
 import Image from 'gatsby-image';
 
+import ProductTypeLabel from './product-type-label';
+
 const BuyButton = ({ variants }) => {
   // TODO write actual logic to find lowest price
   const lowestPrice = variants[0].priceV2;
@@ -32,8 +34,6 @@ const BuyButton = ({ variants }) => {
 };
 
 const ProductCard = ({ product }) => {
-  // TODO: improve link color
-
   return (
     <div
       sx={{
@@ -49,7 +49,30 @@ const ProductCard = ({ product }) => {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         mb: '1rem',
+        overflow: 'hidden',
         pb: '0.75rem',
+        '::before': {
+          position: 'absolute',
+          top: 0,
+          left: '-75%',
+          zIndex: 2,
+          display: 'block',
+          content: '""',
+          width: '50%',
+          height: '100%',
+          pointerEvents: 'none',
+          background: `
+            linear-gradient(
+              to right,
+              rgba(255,255,255,0) 0%,
+              rgba(255,255,255,.3) 100%
+            )
+          `,
+          transform: 'skewX(-25deg)',
+        },
+        ':hover::before': {
+          animation: 'shine .75s',
+        },
       }}
     >
       <Link to={`/product/${product.slug}`}>
@@ -98,36 +121,14 @@ const ProductCard = ({ product }) => {
           Details &rarr;
         </Link>
       </div>
-      <p
+      <ProductTypeLabel
         sx={{
           position: 'absolute',
           top: '0.25rem',
           right: '0.25rem',
-          bg: 'red',
-          color: 'white',
-          fontSize: '0.75rem',
-          lineHeight: 1,
-          m: 0,
-          p: 1,
-          borderRadius: 6,
-          fontWeight: 'bold',
-          textTransform: 'capitalize',
-
-          // TODO make this suck WAY less
-          '&[data-type="stickers"]': {
-            bg: 'blue',
-          },
-          '&[data-type="t-shirt"]': {
-            bg: 'purple',
-          },
-          '&[data-type="tote bag"]': {
-            bg: 'darkorange',
-          },
         }}
-        data-type={product.productType}
-      >
-        {product.productType}
-      </p>
+        type={product.productType}
+      />
       {/* {product.variants.length > 1 &&
         product.variants.map(variant => (
           <p key={variant.title}>Option: {variant.title}</p>

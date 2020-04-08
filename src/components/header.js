@@ -11,6 +11,8 @@ const Header = () => {
         bg: 'background',
         display: 'flex',
         m: 0,
+        width: '100vw',
+        overflow: 'hidden',
         px: '5vw',
         py: 4,
       }}

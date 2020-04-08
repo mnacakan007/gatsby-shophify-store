@@ -9,7 +9,7 @@ import './layout.css';
 const Layout = ({ children, home = false }) => (
   <Fragment>
     <Header />
-    <div class="looney">
+    <div className="looney">
       <main className={home ? 'home' : ''}>{children}</main>
       <aside className="contributors">
         <div className="contributor-container">

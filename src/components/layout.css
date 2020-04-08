@@ -22,6 +22,10 @@
   );
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .looney {
   background: var(--top-fade), var(--fade-to-black-gradient),
     var(--radial-gradient);
@@ -29,16 +33,6 @@
   background-repeat: no-repeat;
   overflow: hidden;
   padding: 0;
-}
-
-main:not(.home) {
-  background: #fff;
-  border-radius: 10px;
-  margin: 50px auto;
-  max-width: 1000px;
-  min-height: 80vh;
-  padding: 30px;
-  width: 90vw;
 }
 
 .contributors {
@@ -131,4 +125,24 @@ footer {
   display: flex;
   height: 100vh;
   justify-content: center;
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
 }
