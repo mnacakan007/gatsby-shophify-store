@@ -1,18 +1,35 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import Image from 'gatsby-image';
 
 import ProductTypeLabel from './product-type-label';
+import { useCart } from '../context/cart-context';
 
-const BuyButton = ({ variants }) => {
-  // TODO write actual logic to find lowest price
-  const lowestPrice = variants[0].priceV2;
+const BuyButton = ({ variants, slug }) => {
+  const { addItemToCart } = useCart();
+  const lowestPrice = variants.sort(
+    (a, b) => a.priceV2.amount - b.priceV2.amount,
+  )[0].priceV2;
 
   const formatted = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: lowestPrice.currencyCode,
   }).format(lowestPrice.amount);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    if (variants.length > 1) {
+      navigate(`/product/${slug}`);
+      return;
+    }
+
+    addItemToCart({
+      variantId: variants[0].shopifyId,
+      quantity: 1,
+    });
+  };
 
   return (
     <button
@@ -27,6 +44,7 @@ const BuyButton = ({ variants }) => {
         px: '8px',
         width: 'auto',
       }}
+      onClick={handleClick}
     >
       {variants.length > 1 ? `Buy from ${formatted}` : `Buy for ${formatted}`}
     </button>
@@ -106,7 +124,7 @@ const ProductCard = ({ product }) => {
         }}
       >
         <div>
-          <BuyButton variants={product.variants} />
+          <BuyButton variants={product.variants} slug={product.slug} />
         </div>
         <Link
           to={`/product/${product.slug}`}

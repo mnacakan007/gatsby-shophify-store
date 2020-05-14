@@ -3,3 +3,6 @@ public
 .env
 yarn-error.log
 .cache
+
+# Local Netlify folder
+.netlify

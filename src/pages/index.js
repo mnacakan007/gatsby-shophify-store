@@ -17,6 +17,7 @@ export const query = graphql`
         description
         tags
         variants {
+          shopifyId
           title
           image {
             localFile {

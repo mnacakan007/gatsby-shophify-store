@@ -1,103 +1,102 @@
-import React, { createContext, /* useContext, */ useReducer } from 'react';
-import Shopify from 'shopify-buy';
+import React, {
+  createContext,
+  useEffect,
+  useCallback,
+  useContext,
+  useReducer,
+} from 'react';
+import { buildClient } from 'shopify-buy';
 
-const client = Shopify.buildClient({
+const client = buildClient({
   domain: process.env.GATSBY_SHOPIFY_DOMAIN,
   storefrontAccessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_API_TOKEN,
 });
 
-let SHOPIFY_CHECKOUT;
+const IS_BROWSER = typeof window !== 'undefined';
 
-async function initializeCheckout() {
-  return new Promise((resolve, reject) => {
-    if (SHOPIFY_CHECKOUT) resolve(SHOPIFY_CHECKOUT);
-
-    const isBrowser = typeof window !== 'undefined';
-    const existingCheckoutID = isBrowser
-      ? localStorage.getItem('shopify_checkout_id')
-      : null;
-
-    console.log({ existingCheckoutID });
-
-    const setCheckoutInState = (checkout) => {
-      if (isBrowser) {
-        localStorage.setItem('shopify_checkout_id', checkout.id);
-      }
-
-      SHOPIFY_CHECKOUT = checkout;
-      resolve(checkout);
-    };
-
-    if (existingCheckoutID && existingCheckoutID !== 'null') {
-      console.log('loading existing checkout');
-      client.checkout
-        .fetch(existingCheckoutID)
-        .then((checkout) => {
-          if (!checkout.completedAt) {
-            console.log('existing checkout found!');
-            setCheckoutInState(checkout);
-          }
-        })
-        .catch((err) => {
-          console.error('something went wrong; bailing');
-          console.error(err);
-          localStorage.removeItem('shopify_checkout_id');
-          reject('error creating a checkout');
-        });
-      return;
-    }
-
-    console.log('creating a new checkout');
-
-    client.checkout
-      .create()
-      .then((checkout) => setCheckoutInState(checkout))
-      .catch((e) => reject(e));
-  });
-}
-
-const reducer = (cart, action) => {
-  console.log({ cart, action });
-
-  // const prepItem = ({ id, quantity }) => [
-  //   {
-  //     variantId: id,
-  //     quantity: parseInt(quantity, 10),
-  //   },
-  // ];
-
+const reducer = (checkout, action) => {
   switch (action.type) {
-    case 'UPDATE_CART':
-      return cart;
-
-    case 'DELETE_CART_ITEM':
-      return cart;
-
-    case 'UPDATE_ITEM_QUANTITY':
-      return cart;
+    case 'SET_CHECKOUT':
+      return action.checkout;
 
     default:
-      return cart;
+      return checkout;
   }
 };
 
 const CartContext = createContext();
 
-export const CartProvider = ({ children }) => (
-  <CartContext.Provider value={useReducer(reducer, new Map())}>
-    {children}
-  </CartContext.Provider>
-);
+export const CartProvider = ({ children }) => {
+  return (
+    <CartContext.Provider value={useReducer(reducer, false)}>
+      {children}
+    </CartContext.Provider>
+  );
+};
 
-export const useCart = async () => {
-  if (!SHOPIFY_CHECKOUT) {
-    console.log('no checkout found');
-    await initializeCheckout();
-  }
-  // const [cartSet, dispatch] = useContext(CartContext);
+export const useCart = () => {
+  const [checkout, dispatch] = useContext(CartContext);
 
-  // const updateCart = (item) => dispatch({ type: 'UPDATE_CART', ...item });
-  // const deleteItem = (sku) => dispatch({ type: 'DELETE_ITEM', sku });
+  const setCheckout = useCallback(
+    (checkout) => dispatch({ type: 'SET_CHECKOUT', checkout }),
+    [dispatch],
+  );
 
-  return { checkout: SHOPIFY_CHECKOUT /* , updateCart, deleteItem  */ };
+  useEffect(() => {
+    async function getCheckout() {
+      if (checkout) return;
+
+      if (!IS_BROWSER) {
+        setCheckout({});
+      }
+
+      // check if we already have a cart stored for this browser
+      const existingCheckoutID = localStorage.getItem('shopify_checkout_id');
+      if (existingCheckoutID && existingCheckoutID !== 'null') {
+        try {
+          const existingCheckout = await client.checkout.fetch(
+            existingCheckoutID,
+          );
+
+          // if this cart was already purchased, clear it and start fresh
+          if (!existingCheckout.completedAt) {
+            setCheckout(existingCheckout);
+            return;
+          }
+        } catch (error) {
+          localStorage.removeItem('shopify_checkout_id');
+        }
+      }
+
+      // if we get here, we need to create a new checkout session
+      const newCheckout = await client.checkout.create();
+      localStorage.setItem('shopify_checkout_id', newCheckout.id);
+      setCheckout(newCheckout);
+    }
+
+    getCheckout();
+  }, [checkout, setCheckout]);
+
+  const prepItem = ({ variantId, quantity }) => [
+    {
+      variantId,
+      quantity: parseInt(quantity, 10),
+    },
+  ];
+
+  const addItemToCart = async (item) => {
+    dispatch({ type: 'PENDING' });
+
+    try {
+      const updatedCheckout = await client.checkout.addLineItems(
+        checkout.id,
+        prepItem(item),
+      );
+      setCheckout(updatedCheckout);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return { checkout, addItemToCart };
 };

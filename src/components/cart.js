@@ -43,15 +43,83 @@ const cartMachine = Machine({
   },
 });
 
-const CartWrapper = forwardRef(({ state }, ref) => {
+const format = (currencyCode) => (n) =>
+  Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currencyCode,
+  }).format(n);
+
+const CartItems = ({ items }) => {
+  if (!items) {
+    return <p>Your cart is empty.</p>;
+  }
+
+  return (
+    <ul sx={{ listStyle: 'none', p: 0 }}>
+      {items.map((item) => {
+        const size =
+          item.variant.title !== 'Default Title'
+            ? ` (${item.variant.title})`
+            : null;
+
+        const unitPrice = format(item.variant.priceV2.currencyCode)(
+          item.variant.priceV2.amount,
+        );
+        const subtotal = format(item.variant.priceV2.currencyCode)(
+          item.variant.priceV2.amount * item.quantity,
+        );
+
+        return (
+          <li
+            key={item.id}
+            sx={{
+              alignItems: 'top',
+              borderBottom: '1px solid',
+              borderBottomColor: 'grayLight',
+              display: 'grid',
+              gap: '0.5rem',
+              gridTemplateColumns: '35px 1fr 70px',
+              py: 2,
+              px: 1,
+              ':first-of-type': {
+                borderTop: 'none',
+              },
+              textAlign: 'left',
+            }}
+          >
+            <div>
+              <img
+                src={item.variant.image.src}
+                alt={item.variant.image.altText}
+                sx={{
+                  display: 'block',
+                  width: '100%',
+                }}
+              />
+            </div>
+            <div>
+              <p sx={{ fontSize: 1, fontWeight: 600, m: 0 }}>
+                {item.title}
+                {size}
+              </p>
+              <p sx={{ fontSize: 0, fontWeight: 300, m: 0 }}>
+                {unitPrice} &times; {item.quantity}
+              </p>
+            </div>
+            <div>
+              <p sx={{ fontSize: 1, m: 0, textAlign: 'right' }}>{subtotal}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+const CartWrapper = forwardRef((_, ref) => {
   const { checkout } = useCart();
 
-  // if (!checkout || !checkout.lineItems) {
-  //   console.log('oof');
-  //   return <p>nope</p>;
-  // }
-
-  // console.log({ lineItems: checkout.lineItems });
+  if (!checkout) return null;
 
   return (
     <div
@@ -66,20 +134,52 @@ const CartWrapper = forwardRef(({ state }, ref) => {
         color: 'text',
         display: 'block',
         height: '100vh',
+        px: 2,
+        py: 3,
         position: 'absolute',
         right: 0,
+        textAlign: 'right',
         top: 0,
         transform: 'translateX(320px)',
         transition: `transform ${TRANSITION_LENGTH}ms ease-in-out`,
-        width: 300,
+        width: 320,
         zIndex: 100,
       }}
     >
-      {JSON.stringify(
-        { checkout: checkout ? checkout.lineItems : [] },
-        null,
-        2,
-      )}
+      <h3 sx={{ m: 0, textAlign: 'left' }}>Cart</h3>
+      <CartItems items={checkout.lineItems} />
+      <p>
+        subtotal:{' '}
+        {format(checkout.subtotalPriceV2.currencyCode)(
+          checkout.subtotalPriceV2.amount,
+        )}
+      </p>
+      <p>
+        tax:{' '}
+        {format(checkout.totalTaxV2.currencyCode)(checkout.totalTaxV2.amount)}
+      </p>
+      <p>
+        total:{' '}
+        {format(checkout.totalPriceV2.currencyCode)(
+          checkout.totalPriceV2.amount,
+        )}
+      </p>
+      <a
+        href={checkout.webUrl}
+        sx={{
+          bg: 'teal',
+          border: '2px solid',
+          borderColor: 'teal',
+          borderRadius: 6,
+          color: 'white',
+          fontSize: 2,
+          fontWeight: 600,
+          p: 2,
+          textDecoration: 'none',
+        }}
+      >
+        Check Out
+      </a>
     </div>
   );
 });
@@ -137,7 +237,7 @@ const Cart = () => {
     return (
       <Fragment>
         <p>
-          open <button onClick={() => send('CLOSE')}>CLOSE</button>
+          <button onClick={() => send('CLOSE')}>CLOSE</button>
         </p>
         <CartWrapper ref={cartRef} state={state.value} />
       </Fragment>
@@ -157,7 +257,7 @@ const Cart = () => {
     return (
       <Fragment>
         <p>
-          closed <button onClick={() => send('OPEN')}>OPEN</button>
+          <button onClick={() => send('OPEN')}>OPEN</button>
         </p>
         <CartWrapper ref={cartRef} state={state.value} />
       </Fragment>

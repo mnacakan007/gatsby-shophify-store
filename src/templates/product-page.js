@@ -37,7 +37,7 @@ export const query = graphql`
 `;
 
 const ProductPage = ({ data }) => {
-  const { checkout } = useCart();
+  const { checkout, addItemToCart } = useCart();
   const product = data.shopifyProduct;
   const needsSizing = product.variants.length > 1;
 
@@ -46,20 +46,13 @@ const ProductPage = ({ data }) => {
 
     const data = new FormData(event.target);
 
-    console.log({
-      checkout,
-      id: data.get('shopifyId'),
+    addItemToCart({
+      variantId: data.get('variantId'),
       quantity: data.get('quantity'),
     });
-
-    // checkout.addLineItems([
-    //   {
-    //     variantId: data.get('shopifyId'),
-    //     quantity: data.get('quantity'),
-    //   },
-    // ]);
   };
 
+  console.log({ checkout });
   return (
     <Layout>
       <div
@@ -90,12 +83,12 @@ const ProductPage = ({ data }) => {
           >
             {needsSizing ? (
               <Fragment>
-                <label htmlFor="shopifyId" className="sr-only">
+                <label htmlFor="variantId" className="sr-only">
                   Size
                 </label>
                 <select
-                  name="shopifyId"
-                  id="shopifyId"
+                  name="variantId"
+                  id="variantId"
                   sx={{
                     bg: 'white',
                     border: '2px solid',
@@ -117,7 +110,7 @@ const ProductPage = ({ data }) => {
             ) : (
               <input
                 type="hidden"
-                name="shopifyId"
+                name="variantId"
                 value={product.variants[0].shopifyId}
               />
             )}

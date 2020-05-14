@@ -1,0 +1,13 @@
+[build]
+  functions = "functions"
+  command = "npm run build"
+  publish = "public"
+
+[dev]
+  command = "npm run develop"
+
+[[plugins]]
+  package = "netlify-plugin-pastel"
+
+[[plugins]]
+  package = "netlify-plugin-gatsby-cache"
