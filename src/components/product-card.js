@@ -52,6 +52,11 @@ const BuyButton = ({ variants, slug }) => {
 };
 
 const ProductCard = ({ product }) => {
+  // don’t display products without images
+  if (!product.variants[0]?.image?.localFile?.childImageSharp?.fluid) {
+    return null;
+  }
+
   return (
     <div
       sx={{
@@ -95,7 +100,7 @@ const ProductCard = ({ product }) => {
     >
       <Link to={`/product/${product.slug}`}>
         <Image
-          fluid={product.variants[0].image.localFile.childImageSharp.fluid}
+          fluid={product.variants[0]?.image?.localFile?.childImageSharp?.fluid}
           alt={product.title}
           sx={{
             width: '100%',

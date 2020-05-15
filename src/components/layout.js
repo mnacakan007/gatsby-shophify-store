@@ -5,6 +5,19 @@ import Header from './header';
 
 // TODO make this use Gatsby stuff
 import './layout.css';
+import { Link } from 'gatsby';
+
+const contributors = [
+  'jlengstorf',
+  'rafaelconde',
+  'tzmanics',
+  'philhawksworth',
+  'sdras',
+  'shortdiv',
+  'marisamorby',
+  'amarilisd',
+  'ikristy',
+];
 
 const Layout = ({ children, home = false }) => (
   <Fragment>
@@ -13,65 +26,80 @@ const Layout = ({ children, home = false }) => (
       <main className={home ? 'home' : ''}>{children}</main>
       <aside className="contributors">
         <div className="contributor-container">
-          <a href="#link" className="contributor-avatar">
-            <img
-              src="https://github.com/jlengstorf.png?size=200"
-              alt="contributor avatar"
-            />
-          </a>
-          <a href="#link" className="contributor-avatar">
-            <img
-              src="https://github.com/rafaelconde.png?size=200"
-              alt="contributor avatar"
-            />
-          </a>
-          <a href="#link" className="contributor-avatar">
-            <img
-              src="https://github.com/tzmanics.png?size=200"
-              alt="contributor avatar"
-            />
-          </a>
-          <a href="#link" className="contributor-avatar">
-            <img
-              src="https://github.com/philhawksworth.png?size=200"
-              alt="contributor avatar"
-            />
-          </a>
-          <a href="#link" className="contributor-avatar">
-            <img
-              src="https://github.com/sdras.png?size=200"
-              alt="contributor avatar"
-            />
-          </a>
-          <a href="#link" className="contributor-avatar">
-            <img
-              src="https://github.com/shortdiv.png?size=200"
-              alt="contributor avatar"
-            />
-          </a>
-          <a href="#link" className="contributor-avatar">
-            <img
-              src="https://github.com/marisamorby.png?size=200"
-              alt="contributor avatar"
-            />
-          </a>
-          <a href="#link" className="contributor-avatar">
-            <img
-              src="https://github.com/amarilisd.png?size=200"
-              alt="contributor avatar"
-            />
-          </a>
-          <a href="#link" className="contributor-avatar">
-            <img
-              src="https://github.com/ikristy.png?size=200"
-              alt="contributor avatar"
-            />
-          </a>
+          {contributors.map((contributor) => (
+            <a
+              href={`https://github.com/${contributor}`}
+              className="contributor-avatar"
+            >
+              <img
+                src={`https://github.com/${contributor}.png?size=200`}
+                alt={contributor}
+                sx={{
+                  borderRadius: '50%',
+                  display: 'block',
+                  maxWidth: '100%',
+                  width: '100%',
+                }}
+              />
+            </a>
+          ))}
         </div>
+        <p
+          sx={{
+            position: 'absolute',
+            bottom: '39%',
+            color: 'white',
+            left: 0,
+            px: 'calc(50vw - 120px)',
+            textAlign: 'center',
+            textShadow: '0 1px 0 black',
+            width: '100%',
+          }}
+        >
+          built by a bunch of wonderful people and one total weirdo
+        </p>
       </aside>
     </div>
-    <footer>
-      <h3>Credits Go Here</h3>
+    <footer
+      sx={{
+        alignItems: 'center',
+        background: 'black',
+        color: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        justifyContent: 'center',
+        paddingBottom: '10rem',
+        h4: {
+          fontSize: 2,
+          mb: 3,
+        },
+        a: {
+          color: 'inherit',
+          fontSize: 0,
+          mb: 6,
+        },
+      }}
+    >
+      <h4>Most Clicked Link in the Footer</h4>
+      <Link to="/shipping-returns">Shipping & Returns</Link>
+
+      <h4>Click This Link to Keep Us Safe</h4>
+      <a href="https://community-docs.netlify.com/code-of-conduct.html">
+        Community Code of Conduct
+      </a>
+
+      <h4>Executive Producer</h4>
+      <Link to="https://www.netlify.com/">Netlify</Link>
+
+      <h4>Starring</h4>
+      <a
+        href="https://github.com/netlify/swag-site/graphs/contributors"
+        sx={{ '&&': { mb: 3 } }}
+      >
+        Contributors
+      </a>
+      <a href="https://github.com/netlify/swag-site">You?</a>
     </footer>
   </Fragment>
 );

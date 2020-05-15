@@ -13,12 +13,22 @@ const Header = () => {
         m: 0,
         width: '100vw',
         overflow: 'hidden',
+        position: 'sticky',
+        pb: '2px',
+        pt: 12,
         px: '5vw',
-        py: 4,
+        top: 0,
+        zIndex: 900,
       }}
     >
       <Link to="/">
-        <img src={logo} alt="Netlify Swag" />
+        <img
+          src={logo}
+          alt="Netlify Swag"
+          sx={{
+            maxWidth: 180,
+          }}
+        />
       </Link>
       <Cart />
     </header>

@@ -98,5 +98,19 @@ export const useCart = () => {
     }
   };
 
-  return { checkout, addItemToCart };
+  const removeItemFromCart = async (variantId) => {
+    dispatch({ type: 'PENDING' });
+
+    try {
+      const updatedCheckout = await client.checkout.removeLineItems(
+        checkout.id,
+        [variantId],
+      );
+      setCheckout(updatedCheckout);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return { checkout, addItemToCart, removeItemFromCart };
 };
