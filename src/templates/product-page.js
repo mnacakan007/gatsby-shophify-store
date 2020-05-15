@@ -37,7 +37,7 @@ export const query = graphql`
 `;
 
 const ProductPage = ({ data }) => {
-  const { checkout, addItemToCart } = useCart();
+  const { addItemToCart } = useCart();
   const product = data.shopifyProduct;
   const needsSizing = product.variants.length > 1;
 
@@ -52,7 +52,6 @@ const ProductPage = ({ data }) => {
     });
   };
 
-  console.log({ checkout });
   return (
     <Layout>
       <div
