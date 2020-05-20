@@ -12,6 +12,7 @@ const Header = () => {
         display: 'flex',
         m: 0,
         width: '100vw',
+        maxWidth: '1200',
         overflow: 'hidden',
         position: 'sticky',
         pb: '2px',

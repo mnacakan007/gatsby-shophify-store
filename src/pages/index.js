@@ -55,6 +55,14 @@ export default ({ data }) => (
         gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
       }}
     >
+      <h2
+        sx={{
+          gridColumn: '1 / 4',
+          mb: 0,
+        }}
+      >
+        New Releases
+      </h2>
       {data.allShopifyProduct.nodes.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

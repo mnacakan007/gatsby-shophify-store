@@ -76,17 +76,25 @@ const CartButton = ({ state, send }) => {
       onClick={handleClick}
       sx={{
         bg: 'white',
-        border: 'none',
+        border: '4px solid',
+        borderColor: 'transparent',
         borderRadius: 20,
         color: 'link',
+        borderRadius: '16px',
+        boxShadow: '0px 2px 4px rgba(14, 30, 37, 0.24)',
         fontSize: 2,
         fontWeight: 600,
-        height: 40,
         position: 'fixed',
         px: 3,
+        pt: '36px',
+        pb: '16px',
         right: 4,
-        top: 2,
+        top: '-20px',
         zIndex: 1000,
+        ':hover': {
+          cursor: 'pointer',
+          borderColor: 'goldHover',
+        },
       }}
     >
       <img src={CartIcon} alt="" sx={{ mr: 2 }} />

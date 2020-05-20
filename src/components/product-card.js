@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
+import { useRef } from 'react';
 import { Link, navigate } from 'gatsby';
 import Image from 'gatsby-image';
 
@@ -7,6 +8,7 @@ import ProductTypeLabel from './product-type-label';
 import { useCart } from '../context/cart-context';
 
 const BuyButton = ({ variants, slug }) => {
+  const ref = useRef();
   const { addItemToCart } = useCart();
   const lowestPrice = variants.sort(
     (a, b) => a.priceV2.amount - b.priceV2.amount,
@@ -17,7 +19,19 @@ const BuyButton = ({ variants, slug }) => {
     currency: lowestPrice.currencyCode,
   }).format(lowestPrice.amount);
 
-  const handleClick = (event) => {
+  const showTooltip = () => {
+    const floater = ref.current.querySelector('span');
+
+    floater.style.visibility = 'visible';
+    ref.current.classList.add('visible');
+
+    setTimeout(() => {
+      ref.current.classList.remove('visible');
+      floater.style.visibility = 'hidden';
+    }, 1000);
+  };
+
+  const handleClick = async (event) => {
     event.preventDefault();
 
     if (variants.length > 1) {
@@ -25,7 +39,8 @@ const BuyButton = ({ variants, slug }) => {
       return;
     }
 
-    addItemToCart({
+    showTooltip();
+    await addItemToCart({
       variantId: variants[0].shopifyId,
       quantity: 1,
     });
@@ -33,20 +48,57 @@ const BuyButton = ({ variants, slug }) => {
 
   return (
     <button
+      ref={ref}
       sx={{
         color: 'heading',
         bg: '#e9ebeb',
-        border: 0,
-        borderRadius: 6,
+        fontFamily: 'body',
         fontSize: '16px',
-        fontWeight: 600,
+        fontWeight: 500,
+        outline: 0,
+        position: 'relative',
         py: '6px',
         px: '8px',
         width: 'auto',
       }}
       onClick={handleClick}
     >
-      {variants.length > 1 ? `Buy from ${formatted}` : `Buy for ${formatted}`}
+      {variants.length > 1
+        ? `Buy from ${formatted}`
+        : `Add to Cart (${formatted})`}
+      <span
+        sx={{
+          bg: 'teal',
+          bottom: '50%',
+          borderRadius: 6,
+          color: 'white',
+          display: 'block',
+          fontSize: 1,
+          opacity: 0,
+          p: 1,
+          position: 'absolute',
+          right: 0,
+          visibility: 'hidden',
+          '.visible &': {
+            animation: 'tip 1000ms ease-out',
+          },
+          '@keyframes tip': {
+            '0%': {
+              opacity: 0,
+              bottom: '50%',
+            },
+            '80%': {
+              opacity: 1,
+            },
+            '100%': {
+              bottom: '120%',
+              opacity: 0,
+            },
+          },
+        }}
+      >
+        Added!
+      </span>
     </button>
   );
 };
@@ -98,7 +150,7 @@ const ProductCard = ({ product }) => {
         },
       }}
     >
-      <Link to={`/product/${product.slug}`}>
+      <Link to={`/product/${product.slug}`} sx={{ marginTop: '0px' }}>
         <Image
           fluid={product.variants[0]?.image?.localFile?.childImageSharp?.fluid}
           alt={product.title}
@@ -109,14 +161,14 @@ const ProductCard = ({ product }) => {
           }}
         />
       </Link>
-      <h2 sx={{ color: 'heading', m: 0, p: '8px' }}>
+      <h3 sx={{ color: 'heading', m: 0, p: '8px' }}>
         <Link
-          sx={{ color: 'inherit', textDecoration: 'none' }}
+          sx={{ color: 'inherit', textDecoration: 'none', fontSize: '24px' }}
           to={`/product/${product.slug}`}
         >
           {product.title}
         </Link>
-      </h2>
+      </h3>
       <p sx={{ m: 0, mb: '8px', px: '8px' }}>{product.description}</p>
       <div
         sx={{
@@ -135,7 +187,6 @@ const ProductCard = ({ product }) => {
           to={`/product/${product.slug}`}
           sx={{
             color: 'link',
-            fontSize: 14,
             textAlign: 'center',
             textDecoration: 'none',
           }}
