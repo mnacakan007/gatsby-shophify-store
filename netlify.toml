@@ -7,7 +7,4 @@
   command = "npm run develop"
 
 [[plugins]]
-  package = "netlify-plugin-pastel"
-
-[[plugins]]
   package = "netlify-plugin-gatsby-cache"
