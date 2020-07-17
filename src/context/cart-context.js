@@ -27,15 +27,16 @@ const reducer = (checkout, action) => {
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const [checkout, dispatch] = useReducer(reducer, false);
   return (
-    <CartContext.Provider value={useReducer(reducer, false)}>
+    <CartContext.Provider value={{ checkout, dispatch }}>
       {children}
     </CartContext.Provider>
   );
 };
 
 export const useCart = () => {
-  const [checkout, dispatch] = useContext(CartContext);
+  const { checkout, dispatch } = useContext(CartContext);
 
   const setCheckout = useCallback(
     (checkout) => dispatch({ type: 'SET_CHECKOUT', checkout }),
