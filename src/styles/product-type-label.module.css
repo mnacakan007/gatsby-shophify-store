@@ -1,0 +1,32 @@
+.label {
+  background: var(--color-black);
+  border-radius: var(--border-radius);
+  color: var(--color-white);
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0;
+  padding: 0.25rem;
+  text-transform: capitalize;
+}
+
+.label[data-type='stickers'] {
+  background: var(--color-blue-dark);
+}
+
+.label[data-type='shirt'] {
+  background: var(--color-pink-dark);
+}
+
+.label[data-type='mug'] {
+  background: var(--color-orange-dark);
+}
+
+.label[data-type='lapel pin'] {
+  background: var(--color-violet-dark);
+}
+
+.label[data-type='socks'] {
+  background: var(--color-yellow-dark);
+}

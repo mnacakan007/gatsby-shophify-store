@@ -1,35 +1,14 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
+import React from 'react';
 import { Link } from 'gatsby';
 import Cart from './cart';
 import logo from '../assets/netlify-swag-logo.svg';
+import styles from '../styles/header.module.css';
 
 const Header = () => {
   return (
-    <header
-      sx={{
-        bg: 'background',
-        display: 'flex',
-        m: 0,
-        width: '100vw',
-        maxWidth: '1200',
-        overflow: 'hidden',
-        position: 'sticky',
-        pb: '2px',
-        pt: 12,
-        px: '5vw',
-        top: 0,
-        zIndex: 900,
-      }}
-    >
+    <header className={styles.header}>
       <Link to="/">
-        <img
-          src={logo}
-          alt="Netlify Swag"
-          sx={{
-            maxWidth: 180,
-          }}
-        />
+        <img src={logo} alt="Netlify Swag" className={styles.logo} />
       </Link>
       <Cart />
     </header>

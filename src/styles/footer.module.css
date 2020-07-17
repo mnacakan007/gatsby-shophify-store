@@ -1,0 +1,21 @@
+.footer {
+  align-items: center;
+  background: var(--color-black);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  padding-bottom: 10rem;
+}
+
+.heading {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.link {
+  color: inherit;
+  font-size: 0.875rem;
+  margin-bottom: 3rem;
+}

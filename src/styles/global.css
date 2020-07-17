@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+@font-face {
+  font-family: 'MADE-Dillan';
+  src: url(/fonts/MADE-Dillan-latin.woff2) format('woff2'),
+    url(/fonts/MADE-Dillan-latin.woff) format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  /* Brand color */
+  --color-teal: #00ad9f;
+  --color-teal-dark: #15847d; /* rgb(21,133,125) */
+  --color-teal-bright: #00e0ce; /* passes AAA on blue-dark-b */
+
+  /* Primary colors */
+  --color-pink: #ff6969;
+  --color-pink-dark: #ff1154;
+  --color-pink-accessible: #e8114e;
+  --color-orange: #f86816;
+  --color-orange-dark: #b74808;
+
+  /* Secondary colors */
+  --color-blue: #43b4d8;
+  --color-blue-dark: #146396;
+  --color-blue-dark-b: #133857;
+  --color-violet: #c57aa2;
+  --color-violet-dark: #7c0c64;
+  --color-yellow: #ffad43;
+  --color-yellow-dark: #cc801f;
+
+  /* Neutrals */
+  --color-white: #fff;
+  --color-black: #0e1e25;
+  --color-gray-1: #2d3b41;
+  --color-gray-2: #646e73;
+  --color-gray-3: #757575;
+  --color-gray-4: #bdbdbd;
+  --color-gray-5: #e0e0e0;
+  --color-gray-6: #f7f8f8;
+
+  /* Fonts */
+  --font-display: 'MADE-Dillan', sans-serif;
+  --font-sans-serif: Roboto, sans-serif;
+  --font-monospace: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+
+  /* Functional */
+  --border-radius: 6px;
+  --box-shadow: 0 0 0 1px #0e1e2511, 0 4px 4px #0e1e2511;
+  --color-focus-ring: var(--color-teal);
+  --grid-gutter: 2.5rem; /* 40px / 16 */
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  color: var(--color-gray-2);
+  font-family: var(--font-sans-serif);
+  margin: 0;
+}

@@ -1,8 +1,7 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
+import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
-import ProductCard from '../components/product-card';
+import { ProductListings } from '../components/product-listings';
 
 export const query = graphql`
   {
@@ -49,33 +48,7 @@ export default ({ data }) => {
 
   return (
     <Layout home>
-      <div
-        sx={{
-          mx: 'auto',
-          maxWidth: '90vw',
-          display: 'grid',
-          gridGap: '1rem',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-          width: 1100,
-        }}
-      >
-        <h1
-          sx={{
-            gridColumn: '1 / 4',
-            color: 'white',
-            fontFamily: 'MADE-dillan',
-            fontSize: 7,
-            fontWeight: 400,
-            mb: 3,
-            mt: 5,
-          }}
-        >
-          This Is Our Swag
-        </h1>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <ProductListings products={products} />
     </Layout>
   );
 };

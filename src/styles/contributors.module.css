@@ -1,0 +1,76 @@
+.contributors {
+  align-items: center;
+  display: flex;
+  height: 1400px;
+  justify-content: center;
+  position: relative;
+}
+
+.container {
+  align-content: center;
+  background: rgb(14, 30, 37);
+  clip-path: circle(140px at center);
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, 80px);
+  justify-content: center;
+  height: 280px;
+  width: 280px;
+}
+
+.avatar {
+  background: var(--color-black);
+  border: 1px solid var(--color-black);
+  border-radius: 50%;
+  box-shadow: 0 4px 4px rgba(14, 30, 37, 41%);
+  display: block;
+  opacity: 1;
+  width: 80px;
+}
+
+.avatar img {
+  border-radius: 50%;
+  display: block;
+  max-width: 100%;
+  width: 100%;
+}
+
+/* this is a goofy idea that doesn’t scale */
+.avatar:nth-child(1) {
+  transform: translate(25px, 20px) scale(0.7);
+}
+.avatar:nth-child(2) {
+  transform: translate(-5px, 10px) scale(0.9);
+}
+.avatar:nth-child(3) {
+  transform: translate(-25px, 40px) scale(1.1);
+}
+.avatar:nth-child(4) {
+  transform: translate(25px, -20px) scale(0.95);
+}
+.avatar:nth-child(5) {
+  transform: translate(10px, -10px) scale(1);
+}
+.avatar:nth-child(6) {
+  transform: translate(-15px, 10px) scale(0.95);
+}
+.avatar:nth-child(7) {
+  transform: translate(40px, -35px) scale(1.2);
+}
+.avatar:nth-child(8) {
+  transform: translate(5px, -30px) scale(0.9);
+}
+.avatar:nth-child(9) {
+  transform: translate(-25px, -15px) scale(0.8);
+}
+
+.tagline {
+  position: absolute;
+  bottom: 39%;
+  color: var(--color-white);
+  left: 0;
+  px: calc(50vw - 120px);
+  text-align: center;
+  text-shadow: 0 1px 0 var(--color-black);
+  width: 100%;
+}

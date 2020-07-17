@@ -1,0 +1,19 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90vw;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  width: 1100;
+}
+
+.heading {
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 400;
+  grid-column: 1 / 4;
+  margin-bottom: 2rem;
+  margin-top: 4rem;
+}

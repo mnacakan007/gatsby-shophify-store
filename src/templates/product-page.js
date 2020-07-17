@@ -1,12 +1,11 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import Layout from '../components/layout';
 import ProductTypeLabel from '../components/product-type-label';
 import Cart from '../assets/cart.svg';
 import { useCart } from '../context/cart-context';
+import styles from '../styles/product-details.module.css';
 
 export const query = graphql`
   query($productID: String) {
@@ -60,49 +59,17 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
-      <h1
-        sx={{
-          color: 'white',
-          fontFamily: 'MADE-dillan',
-          fontSize: 7,
-          fontWeight: 400,
-          mb: 4,
-          mt: 5,
-          mx: 'auto',
-          maxWidth: '90vw',
-          width: 1100,
-        }}
-      >
-        {product.title}
-      </h1>
-      <div
-        sx={{
-          bg: 'white',
-          borderRadius: 8,
-          display: 'grid',
-          gap: 4,
-          gridTemplateColumns: '1fr 35%',
-          margin: '50px auto',
-          maxWidth: 1100,
-          mt: 0,
-          p: 2,
-          pl: 3,
-          width: '90vw',
-        }}
-      >
+      <h1 className={styles.heading}>{product.title}</h1>
+      <div className={styles.details}>
         <div>
-          <p sx={{ color: 'background', fontSize: 3, fontWeight: 'bold' }}>
-            {price}
-          </p>
+          <p className={styles.price}>{price}</p>
           <ProductTypeLabel type={product.productType} />
           <p>{product.description}</p>
           <form
             onSubmit={handleSubmit}
-            sx={{
-              display: 'grid',
-              gap: 2,
-              gridTemplateColumns: needsSizing ? '1fr 1fr 2fr' : '1fr 2fr',
-            }}
+            className={`${styles.form} ${
+              needsSizing ? styles.needsSizing : ''
+            }`}
           >
             {needsSizing ? (
               <Fragment>
@@ -112,14 +79,7 @@ const ProductPage = ({ data }) => {
                 <select
                   name="variantId"
                   id="variantId"
-                  sx={{
-                    bg: 'white',
-                    border: '2px solid',
-                    borderColor: 'grayLight',
-                    borderRadius: 6,
-                    fontSize: 2,
-                    p: 2,
-                  }}
+                  className={styles.select}
                 >
                   {product.variants
                     .filter((v) => v.availableForSale)
@@ -147,29 +107,11 @@ const ProductPage = ({ data }) => {
               type="number"
               min={1}
               defaultValue={1}
-              sx={{
-                border: '2px solid',
-                borderColor: 'grayLight',
-                borderRadius: 6,
-                fontSize: 2,
-                p: 2,
-              }}
+              className={styles.quantity}
             />
 
-            <button
-              type="submit"
-              sx={{
-                bg: 'teal',
-                border: '2px solid',
-                borderColor: 'teal',
-                borderRadius: 6,
-                color: 'white',
-                fontSize: 2,
-                fontWeight: 600,
-                p: 2,
-              }}
-            >
-              <img src={Cart} alt="" sx={{ mr: 1 }} />
+            <button type="submit" className={styles.button}>
+              <img src={Cart} alt="" className={styles.icon} />
               Add to Cart
             </button>
           </form>
