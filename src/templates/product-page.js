@@ -41,6 +41,12 @@ const ProductPage = ({ data }) => {
   const product = data.shopifyProduct;
   const needsSizing = product.variants.length > 1;
 
+  const firstVariant = product.variants[0];
+  const price = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: firstVariant.priceV2.currencyCode,
+  }).format(firstVariant.priceV2.amount);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -54,6 +60,21 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
+      <h1
+        sx={{
+          color: 'white',
+          fontFamily: 'MADE-dillan',
+          fontSize: 7,
+          fontWeight: 400,
+          mb: 4,
+          mt: 5,
+          mx: 'auto',
+          maxWidth: '90vw',
+          width: 1100,
+        }}
+      >
+        {product.title}
+      </h1>
       <div
         sx={{
           bg: 'white',
@@ -62,14 +83,17 @@ const ProductPage = ({ data }) => {
           gap: 4,
           gridTemplateColumns: '1fr 35%',
           margin: '50px auto',
-          maxWidth: 1000,
+          maxWidth: 1100,
+          mt: 0,
           p: 2,
           pl: 3,
           width: '90vw',
         }}
       >
         <div>
-          <h1 sx={{ color: 'heading' }}>{product.title}</h1>
+          <p sx={{ color: 'background', fontSize: 3, fontWeight: 'bold' }}>
+            {price}
+          </p>
           <ProductTypeLabel type={product.productType} />
           <p>{product.description}</p>
           <form

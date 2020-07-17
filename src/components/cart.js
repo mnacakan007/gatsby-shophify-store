@@ -78,7 +78,6 @@ const CartButton = ({ state, send }) => {
         bg: 'white',
         border: '4px solid',
         borderColor: 'transparent',
-        borderRadius: 20,
         color: 'link',
         borderRadius: '16px',
         boxShadow: '0px 2px 4px rgba(14, 30, 37, 0.24)',

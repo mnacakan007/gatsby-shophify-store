@@ -65,7 +65,7 @@ const BuyButton = ({ variants, slug }) => {
     >
       {variants.length > 1
         ? `Buy from ${formatted}`
-        : `Add to Cart (${formatted})`}
+        : `Add to Cart for ${formatted}`}
       <span
         sx={{
           bg: 'teal',
@@ -190,7 +190,6 @@ const ProductCard = ({ product }) => {
             textAlign: 'center',
             textDecoration: 'none',
           }}
-          href="#TODO-product-detail-page"
         >
           Details &rarr;
         </Link>
@@ -203,10 +202,6 @@ const ProductCard = ({ product }) => {
         }}
         type={product.productType}
       />
-      {/* {product.variants.length > 1 &&
-        product.variants.map(variant => (
-          <p key={variant.title}>Option: {variant.title}</p>
-        ))} */}
     </div>
   );
 };

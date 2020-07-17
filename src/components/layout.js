@@ -30,6 +30,7 @@ const Layout = ({ children, home = false }) => (
             <a
               href={`https://github.com/${contributor}`}
               className="contributor-avatar"
+              key={contributor}
             >
               <img
                 src={`https://github.com/${contributor}.png?size=200`}
@@ -90,7 +91,7 @@ const Layout = ({ children, home = false }) => (
       </a>
 
       <h4>Executive Producer</h4>
-      <Link to="https://www.netlify.com/">Netlify</Link>
+      <a href="https://www.netlify.com/">Netlify</a>
 
       <h4>Starring</h4>
       <a

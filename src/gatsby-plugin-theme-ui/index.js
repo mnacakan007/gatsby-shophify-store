@@ -1,6 +1,6 @@
 export default {
   colors: {
-    background: '#002326',
+    background: '#0e1e25',
     teal: '#009488',
     text: '#646E73',
     link: '#007A70',
