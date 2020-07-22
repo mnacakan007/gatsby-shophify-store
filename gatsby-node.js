@@ -34,6 +34,21 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
+  const pagesResult = await graphql(`
+    {
+      allShopifyPage {
+        edges {
+          node {
+            id
+            handle
+            title
+            body
+            bodySummary
+          }
+        }
+      }
+    }
+  `);
   const products = result.data.allShopifyProduct.nodes;
 
   products.forEach((product) => {
@@ -54,4 +69,17 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   });
+
+  const pages = pagesResult.data.allShopifyPage.edges;
+
+  pages.forEach(page => {
+    actions.createPage({
+      path: `/pages/${page.node.handle}`,
+      component: require.resolve("./src/templates/page.js"),
+      context: {
+        pageHandle: page.node.handle,
+      },
+    });
+  })
+
 };

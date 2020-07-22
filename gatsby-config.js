@@ -19,8 +19,8 @@ module.exports = {
         shopName: 'netlify',
         // get this: https://netlify.myshopify.com/admin/apps/private
         accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_API_TOKEN,
-        apiVersion: '2020-01',
-        includeCollections: ['shop'],
+        apiVersion: "2020-01",
+        includeCollections: ["shop", "content"],
       },
     },
   ],
