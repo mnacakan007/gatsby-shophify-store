@@ -41,8 +41,6 @@ const ProductPage = ({ data }) => {
   const product = data.shopifyProduct;
   const needsSizing = product.variants.length > 1;
 
-  console.log(product);
-
   const firstVariant = product.variants[0];
   const price = new Intl.NumberFormat('en-US', {
     style: 'currency',
