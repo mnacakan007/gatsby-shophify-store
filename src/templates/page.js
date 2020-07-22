@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React from "react";
 import { graphql } from 'gatsby';
+import styles from "../styles/page.module.css";
+import parse from "html-react-parser";
 
 import Layout from '../components/layout';
-import SEO from '../components/seo';
 
 export const query = graphql`
   query($pageHandle: String) {
@@ -17,10 +18,14 @@ export const query = graphql`
 const Page = ({ data }) => {
 
   const page = data.shopifyPage;
+  const body = parse(page.body);
 
   return (
     <Layout>
-      <h1>{page.title}</h1>
+      <div className={styles.container}>
+        <h1>{page.title}</h1>
+        {body}
+      </div>
     </Layout>
   );
 };
