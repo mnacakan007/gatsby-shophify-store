@@ -68,10 +68,10 @@ exports.createPages = async ({ graphql, actions }) => {
 
   pages.forEach(page => {
     actions.createPage({
-      path: `/pages/${page.node.handle}`,
+      path: `/pages/${page.handle}`,
       component: require.resolve("./src/templates/page.js"),
       context: {
-        pageHandle: page.node.handle,
+        pageHandle: page.handle,
       },
     });
   })
