@@ -61,12 +61,19 @@
 }
 
 .buttons {
+  --gutter: 0.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
   margin-top: auto;
+  margin-left: calc(-1 * var(--gutter));
+  margin-right: calc(-1 * var(--gutter));
+  margin-bottom: calc(-1 * var(--gutter));
+}
+
+.buttons > * {
+  margin: var(--gutter);
 }
 
 .details {
