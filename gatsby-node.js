@@ -31,24 +31,18 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-    }
-  `);
-
-  const pagesResult = await graphql(`
-    {
-      allShopifyPage {
-        edges {
-          node {
-            id
-            handle
-            title
-            body
-            bodySummary
-          }
+      allShopifyPage(filter: { handle: { ne: "netlify-swag-for-all" } }) {
+        nodes {
+          id
+          handle
+          title
+          body
+          bodySummary
         }
       }
     }
   `);
+
   const products = result.data.allShopifyProduct.nodes;
 
   products.forEach((product) => {
@@ -70,7 +64,7 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  const pages = pagesResult.data.allShopifyPage.edges;
+  const pages = result.data.allShopifyPage.nodes;
 
   pages.forEach(page => {
     actions.createPage({
