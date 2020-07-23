@@ -13,7 +13,8 @@
   font-family: var(--font-display);
   font-size: 3.5rem;
   font-weight: 400;
-  grid-column: 1 / 4;
+  grid-column: 1 / -1;
   margin-bottom: 2rem;
   margin-top: 4rem;
+  text-align: center;
 }
