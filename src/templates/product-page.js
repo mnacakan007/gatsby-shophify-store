@@ -59,23 +59,20 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
-      <h1 className={styles.heading}>{product.title}</h1>
       <div className={styles.details}>
-        <div>
+        <div className={styles.productDetailsContentContainer}>
+          <h1 className={styles.heading}>{product.title}</h1>
           <p className={styles.price}>{price}</p>
-          <ProductTypeLabel type={product.productType} />
           <p>{product.description}</p>
           <form
             onSubmit={handleSubmit}
             className={`${styles.form} ${
-              needsSizing ? styles.needsSizing : ''
+              needsSizing ? styles.needsSizing : ""
             }`}
           >
             {needsSizing ? (
-              <Fragment>
-                <label htmlFor="variantId" className="sr-only">
-                  Size
-                </label>
+              <div className={styles.formRow}>
+                <label htmlFor="variantId">Size</label>
                 <select
                   name="variantId"
                   id="variantId"
@@ -89,7 +86,7 @@ const ProductPage = ({ data }) => {
                       </option>
                     ))}
                 </select>
-              </Fragment>
+              </div>
             ) : (
               <input
                 type="hidden"
@@ -98,17 +95,17 @@ const ProductPage = ({ data }) => {
               />
             )}
 
-            <label htmlFor="quantity" className="sr-only">
-              Quantity
-            </label>
-            <input
-              name="quantity"
-              id="quantity"
-              type="number"
-              min={1}
-              defaultValue={1}
-              className={styles.quantity}
-            />
+            <div className={styles.formRow}>
+              <label htmlFor="quantity">Quantity</label>
+              <input
+                name="quantity"
+                id="quantity"
+                type="number"
+                min={1}
+                defaultValue={1}
+                className={styles.quantity}
+              />
+            </div>
 
             <button type="submit" className={styles.button}>
               <img src={Cart} alt="" className={styles.icon} />
@@ -116,7 +113,11 @@ const ProductPage = ({ data }) => {
             </button>
           </form>
         </div>
-        <div>
+        <div className={styles.productDetailsImageContainer}>
+          <ProductTypeLabel
+            type={product.productType}
+            className={styles.productDetailsProductType}
+          />
           <Image
             fluid={product.images[0].localFile.childImageSharp.fluid}
             alt={product.title}
