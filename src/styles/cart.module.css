@@ -19,6 +19,7 @@
 .heading {
   color: var(--color-pink-accessible);
   font-family: var(--font-display);
+  font-weight: 400;
   font-size: 1.75rem;
   margin: 0;
   text-align: left;

@@ -1,4 +1,5 @@
 .card {
+  --padding: 1em;
   position: relative;
   background: var(--color-white);
   border: 5px solid var(--color-white);
@@ -9,7 +10,7 @@
   justify-content: flex-start;
   margin-bottom: 1rem;
   overflow: hidden;
-  padding-bottom: 0.75rem;
+  padding: var(--padding);
 }
 
 .card::before {
@@ -37,14 +38,16 @@
 .image {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  width: 100%;
+  width: calc(100% + (2 * var(--padding)));
+  margin-left: calc(-1 * var(--padding));
+  margin-right: calc(-1 * var(--padding));
+  margin-top: calc(-1 * var(--padding));
 }
 
 .heading {
   color: var(--color-gray-1);
   font-size: 1.5rem;
-  margin: 0;
-  padding: 8px;
+  margin: 0.7em 0 0.7em 0;
 }
 
 .heading a {
@@ -53,22 +56,31 @@
 }
 
 .description {
-  margin: 0 0 8px;
-  padding: 0 8px;
+  margin: 0 0 3.75em 0;
+  font-weight: bold;
 }
 
 .buttons {
-  align-items: baseline;
-  display: grid;
-  grid-template-columns: 180px 1fr;
+  --gutter: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   margin-top: auto;
-  padding: 8px 8px 0;
+  margin-left: calc(-1 * var(--gutter));
+  margin-right: calc(-1 * var(--gutter));
+  margin-bottom: calc(-1 * var(--gutter));
+}
+
+.buttons > * {
+  margin: var(--gutter);
 }
 
 .details {
   color: var(--color-teal-dark);
-  text-align: center;
+  text-align: right;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .button {
@@ -77,11 +89,11 @@
   border-radius: var(--border-radius);
   color: var(--color-black);
   font-family: var(--font-sans-serif);
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 700;
   outline: 0;
   position: relative;
-  padding: 6px 8px;
+  padding: 6px 0.5rem;
   width: auto;
 }
 

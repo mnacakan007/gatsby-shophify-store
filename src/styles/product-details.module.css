@@ -1,40 +1,52 @@
 .heading {
-  color: var(--color-white);
+  color: var(--color-black);
   font-family: var(--font-display);
-  font-size: 3.5rem;
   font-weight: 400;
-  grid-column: 1 / 4;
-  margin: 4rem auto 2rem;
-  max-width: 90vw;
-  width: 1100px;
+  font-size: 2.5em;
+  margin: 0.2em 0 0.2em 0;
 }
 
 .details {
   background: var(--color-white);
   border-radius: var(--border-radius);
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: 1fr 35%;
-  margin: 0 auto 50px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5em auto 50px auto;
   max-width: 1100px;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
   width: 90vw;
 }
 
+.description {
+  font-weight: bold;
+}
+
 .price {
-  color: var(--color-black);
-  font-size: 1.5rem;
-  font-weight: 600;
+  color: var(--color-gray-2);
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 0 2em 0;
 }
 
 .form {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 1fr 2fr;
+  --gutter: 0.5em;
+  margin: 0 calc(-1 * var(--gutter));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
 }
 
-.form.needsSizing {
-  grid-template-columns: 1fr 1fr 2fr;
+.form > * {
+  margin: var(--gutter)
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row label {
+  margin-bottom: 0.4em;
 }
 
 .select {
@@ -58,10 +70,39 @@
   border-radius: var(--border-radius);
   color: var(--color-white);
   font-size: 1rem;
-  font-weight: 600;
-  padding: 0.5rem;
+  font-weight: bold;
+  padding: 0.5rem 1em;
 }
 
 .icon {
   margin-right: 0.25rem;
+}
+
+.product-details-product-type {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 99;
+}
+.product-details-content-container {
+  flex: 1 1 20em;
+  padding-right: 3em;
+}
+.product-details-image-container {
+  position: relative;
+  flex-basis: 25em;
+}
+
+@media (max-width: 51.625rem) /* < 700px */ {
+  .heading {
+    font-size: 1.9em;
+    margin-top: 1em;
+  }
+  .product-details-content-container {
+    padding-right: 0;
+  }
+  .product-details-image-container {
+    flex-grow: 1;
+    order: -1;
+  }
 }

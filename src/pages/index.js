@@ -25,12 +25,12 @@ export const query = graphql`
               localFile {
                 childImageSharp {
                   fluid(
-                    maxWidth: 1600
+                    maxWidth: 900
                     maxHeight: 900
                     fit: COVER
                     cropFocus: CENTER
                   ) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                    ...GatsbyImageSharpFluid
                   }
                 }
               }

@@ -1,7 +1,7 @@
 .container {
   --top-fade: linear-gradient(
     to bottom,
-    var(--color-pink-dark) calc(100% - 1600px),
+    var(--color-black) calc(100% - 1600px),
     #0e1e2500 calc(100% - 900px)
   );
   --fade-to-black-gradient: linear-gradient(
@@ -12,9 +12,9 @@
   );
   --radial-gradient: repeating-radial-gradient(
     circle at center calc(100% - 700px),
-    var(--color-pink-accessible) 0 20px,
-    var(--color-pink-dark) 82px,
-    var(--color-pink) 90px,
+    var(--color-black) 0 20px,
+    #16272e 82px,
+    #1c2f36 90px,
     transparent 90px
   );
 
