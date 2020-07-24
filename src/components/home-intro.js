@@ -6,7 +6,7 @@ export function HomeIntro({ title, body }) {
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>{title}</h1>
-      {parse(body)}
+      <div className={styles.intro}>{parse(body)}</div>
     </div>
   );
 }
