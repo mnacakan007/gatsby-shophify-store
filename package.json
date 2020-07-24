@@ -22,9 +22,11 @@
     "gatsby-source-filesystem": "^2.3.19",
     "gatsby-source-shopify": "^3.2.21",
     "gatsby-transformer-sharp": "^2.5.11",
+    "html-react-parser": "^0.13.0",
     "netlify-plugin-gatsby-cache": "^0.3.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-helmet": "^6.1.0",
     "shopify-buy": "^2.11.0",
     "slugify": "^1.4.4",
     "xstate": "^4.11.0"

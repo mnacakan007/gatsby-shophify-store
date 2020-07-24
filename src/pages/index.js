@@ -1,12 +1,16 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
-import { ProductListings } from '../components/product-listings';
+import { CollectionListings } from '../components/collection-listings';
+import { HomeIntro } from '../components/home-intro';
 
 export const query = graphql`
   {
-    allShopifyCollection(filter: { title: { eq: "Publicly Available" } }) {
+    allShopifyCollection {
       nodes {
+        descriptionHtml
+        handle
+        title
         products {
           id
           title
@@ -40,15 +44,35 @@ export const query = graphql`
         }
       }
     }
+    shopifyPage(handle: {eq: "netlify-swag-for-all"}) {
+    body
+    title
+  }
   }
 `;
 
-export default ({ data }) => {
-  const products = data?.allShopifyCollection?.nodes[0]?.products ?? [];
+const promoProductsCollection = "1-million-devs-swag";
+const allProductsCollection = "netlify-swag-store";
 
+export default ({ data }) => {
+  const promotionalProducts = data.allShopifyCollection.nodes.filter(
+    (node) => {
+      return node.handle === promoProductsCollection;
+    }
+  );
+  
+  const allProducts = data.allShopifyCollection.nodes.filter(
+    (node) => {
+      return node.handle === allProductsCollection;
+    }
+  );
+
+  const { title, body } = data.shopifyPage;
   return (
     <Layout home>
-      <ProductListings products={products} />
+      <HomeIntro title={title} body={body} />
+      <CollectionListings collection={promotionalProducts[0]} />
+      <CollectionListings collection={allProducts[0]} />
     </Layout>
   );
 };
