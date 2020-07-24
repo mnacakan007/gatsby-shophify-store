@@ -4,19 +4,19 @@ require('dotenv').config({
 
 module.exports = {
   plugins: [
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'pages',
-        path: 'src/pages',
+        name: "pages",
+        path: "src/pages",
       },
     },
     {
-      resolve: 'gatsby-source-shopify',
+      resolve: "gatsby-source-shopify",
       options: {
-        shopName: 'netlify',
+        shopName: "netlify",
         // get this: https://netlify.myshopify.com/admin/apps/private
         accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_API_TOKEN,
         apiVersion: "2020-01",
@@ -24,4 +24,8 @@ module.exports = {
       },
     },
   ],
+  siteMetadata: {
+    title: "Netlify Swag Store",
+    description: "Default meta description",
+  },
 };
