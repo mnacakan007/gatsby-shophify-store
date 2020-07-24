@@ -31,6 +31,15 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allShopifyPage(filter: { handle: { ne: "netlify-swag-for-all" } }) {
+        nodes {
+          id
+          handle
+          title
+          body
+          bodySummary
+        }
+      }
     }
   `);
 
@@ -54,4 +63,17 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   });
+
+  const pages = result.data.allShopifyPage.nodes;
+
+  pages.forEach(page => {
+    actions.createPage({
+      path: `/pages/${page.handle}`,
+      component: require.resolve("./src/templates/page.js"),
+      context: {
+        pageHandle: page.handle,
+      },
+    });
+  })
+
 };

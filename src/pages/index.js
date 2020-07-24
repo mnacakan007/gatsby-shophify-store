@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import { CollectionListings } from '../components/collection-listings';
+import { HomeIntro } from '../components/home-intro';
 
 export const query = graphql`
   {
@@ -43,6 +44,10 @@ export const query = graphql`
         }
       }
     }
+    shopifyPage(handle: {eq: "netlify-swag-for-all"}) {
+    body
+    title
+  }
   }
 `;
 
@@ -62,8 +67,10 @@ export default ({ data }) => {
     }
   );
 
+  const { title, body } = data.shopifyPage;
   return (
     <Layout home>
+      <HomeIntro title={title} body={body} />
       <CollectionListings collection={promotionalProducts[0]} />
       <CollectionListings collection={allProducts[0]} />
     </Layout>
