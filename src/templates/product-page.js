@@ -6,6 +6,7 @@ import ProductTypeLabel from '../components/product-type-label';
 import Cart from '../assets/cart.svg';
 import { useCart } from '../context/cart-context';
 import styles from '../styles/product-details.module.css';
+import SEO from '../components/seo';
 
 export const query = graphql`
   query($productID: String) {
@@ -59,6 +60,7 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
+      <SEO product={{...product }}/>
       <h1 className={styles.heading}>{product.title}</h1>
       <div className={styles.details}>
         <div>
