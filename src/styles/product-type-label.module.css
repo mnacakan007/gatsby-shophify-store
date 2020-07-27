@@ -1,6 +1,6 @@
 .label {
   background: var(--color-black);
-  border-radius: var(--border-radius);
+  border-radius: 2px;
   color: var(--color-white);
   display: inline-block;
   font-size: 0.75rem;

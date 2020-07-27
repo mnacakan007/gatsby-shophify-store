@@ -4,6 +4,7 @@
   font-weight: 400;
   font-size: 2.5em;
   margin: 0.2em 0 0.2em 0;
+  line-height: 1.1;
 }
 
 .details {
@@ -19,6 +20,8 @@
 
 .description {
   font-weight: bold;
+  color: var(--color-gray-1);
+  font-size: 1.15em;
 }
 
 .price {
@@ -105,4 +108,24 @@
     flex-grow: 1;
     order: -1;
   }
+}
+
+.metafields {
+  font-size: 0.8em;
+  color: var(--color-gray-2);
+  margin-bottom: 1.5em;
+}
+
+.metafields dl {
+  padding-left: 1.1em;
+}
+
+.metafields dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+
+.metafields dd {
+  margin-left: 1.1em;
+  margin-bottom: 0.5em;
 }

@@ -1,19 +1,8 @@
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 90vw;
-  display: grid;
-  grid-gap: 22px;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  width: 1100px;
-}
-
 .heading {
   color: var(--color-white);
   font-family: var(--font-display);
   font-size: 2.7rem;
   font-weight: 400;
-  grid-column: 1 / -1;
   margin-bottom: 2rem;
   margin-top: 4rem;
   text-align: center;

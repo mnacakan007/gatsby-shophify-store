@@ -82,7 +82,7 @@ const ProductCard = ({ product }) => {
           Details &rarr;
         </Link>
       </div>
-      <ProductTypeLabel className={styles.label} type={product.productType} />
+      {product.productType && <ProductTypeLabel className={styles.label} type={product.productType} />}
     </div>
   );
 };

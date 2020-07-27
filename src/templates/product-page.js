@@ -22,6 +22,10 @@ export const query = graphql`
           }
         }
       }
+      metafields {
+        value
+        key
+      }
       variants {
         shopifyId
         availableForSale
@@ -42,9 +46,10 @@ const ProductPage = ({ data }) => {
   const needsSizing = product.variants.length > 1;
 
   const firstVariant = product.variants[0];
+  const currency = firstVariant.priceV2.currencyCode;
   const price = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: firstVariant.priceV2.currencyCode,
+    currency: currency,
   }).format(firstVariant.priceV2.amount);
 
   const handleSubmit = (event) => {
@@ -65,8 +70,27 @@ const ProductPage = ({ data }) => {
       <div className={styles.details}>
         <div className={styles.productDetailsContentContainer}>
           <h1 className={styles.heading}>{product.title}</h1>
-          <p className={styles.price}>{price}</p>
-          <p>{product.description}</p>
+          <p className={styles.price}>{currency} {price}</p>
+          <p className={styles.description}>{product.description}</p>
+          {product.metafields.length > 0 ? (
+            <details className={styles.metafields}>
+              <summary>Product details</summary>
+              <dl>
+                {product.metafields.map(metafield => {
+                  return (
+                    <Fragment>
+                      <dt>{metafield.key}:</dt>
+                      <dd>{metafield.value}</dd>
+                    </Fragment>
+                  )
+                })}
+              </dl>
+            </details>
+          ) : (
+            " "
+          )}
+
+
           <form
             onSubmit={handleSubmit}
             className={`${styles.form} ${
@@ -117,10 +141,12 @@ const ProductPage = ({ data }) => {
           </form>
         </div>
         <div className={styles.productDetailsImageContainer}>
-          <ProductTypeLabel
-            type={product.productType}
-            className={styles.productDetailsProductType}
-          />
+          {product.productType &&
+            <ProductTypeLabel
+              type={product.productType}
+              className={styles.productDetailsProductType}
+            />
+          }
           <Image
             fluid={product.images[0].localFile.childImageSharp.fluid}
             alt={product.title}
