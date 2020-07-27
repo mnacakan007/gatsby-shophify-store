@@ -7,6 +7,7 @@ import Cart from '../assets/cart.svg';
 import { useCart } from '../context/cart-context';
 import styles from '../styles/product-details.module.css';
 import SEO from '../components/seo';
+import { SizingChart } from '../components/sizing-chart';
 
 export const query = graphql`
   query($productID: String) {
@@ -66,7 +67,6 @@ const ProductPage = ({ data }) => {
   return (
     <Layout>
       <SEO product={{...product }}/>
-      <h1 className={styles.heading}>{product.title}</h1>
       <div className={styles.details}>
         <div className={styles.productDetailsContentContainer}>
           <h1 className={styles.heading}>{product.title}</h1>
@@ -153,6 +153,11 @@ const ProductPage = ({ data }) => {
           />
         </div>
       </div>
+      <div className={styles.details}>
+        <h2 className={styles.heading}>Sizing chart</h2>
+        <SizingChart />
+      </div>
+      
     </Layout>
   );
 };

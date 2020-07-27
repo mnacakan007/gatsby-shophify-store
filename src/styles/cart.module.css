@@ -10,9 +10,10 @@
   right: 0;
   text-align: right;
   top: 0;
-  transform: translate3d(320px, 0, 0);
+  transform: translate3d(100%, 0, 0);
   transition: transform 200ms ease-out;
-  width: 320px;
+  width: 100vw;
+  max-width: 400px;
   z-index: 100;
 }
 
@@ -32,6 +33,10 @@
 .items {
   list-style: none;
   padding: 0;
+}
+
+.taxes-and-shipping span {
+  grid-column: span 2;
 }
 
 .item {
@@ -87,9 +92,14 @@
   background: transparent;
   color: var(--color-teal-dark);
   cursor: pointer;
-  font-size: 0.875rem;
-  opacity: 0.25;
+  font-size: 1.1rem;
+  line-height: 1;
+  opacity: 1;
   transition: opacity 200ms linear;
+}
+
+.remove:hover {
+  color: var(--color-black);
 }
 
 .totals {
@@ -104,7 +114,7 @@
   grid-template-columns: 1fr 100px;
   font-size: 0.875rem;
   font-weight: 200;
-  margin: 0;
+  margin: 0 0 1rem 0;
 }
 
 .total span {
@@ -125,6 +135,11 @@
   margin: 1rem 20px 0 0;
   padding: 0.5rem;
   text-decoration: none;
+}
+
+.checkout:hover {
+  background-color: var(--color-black);
+  border-color: var(--color-black);
 }
 
 .toggle {

@@ -150,24 +150,11 @@ const CartWrapper = forwardRef((_, ref) => {
         <Fragment>
           <CartItems items={checkout.lineItems} />
           <ul className={styles.totals}>
-            <li>
-              <span>Subtotal:</span>
-              <span>
-                {format(checkout.subtotalPriceV2.currencyCode)(
-                  checkout.subtotalPriceV2.amount,
-                )}
-              </span>
-            </li>
-            <li>
-              <span>Tax:</span>
-              <span>
-                {format(checkout.totalTaxV2.currencyCode)(
-                  checkout.totalTaxV2.amount,
-                )}
-              </span>
+            <li className={styles.taxesAndShipping}>
+              <span>Taxes and Shipping calculated at checkout</span>
             </li>
             <li className={styles.total}>
-              <span>Total:</span>
+              <span>Subtotal:</span>
               <span>
                 {format(checkout.totalPriceV2.currencyCode)(
                   checkout.totalPriceV2.amount,
@@ -203,7 +190,7 @@ const Cart = () => {
     () =>
       new Promise((resolve, reject) => {
         try {
-          cartRef.current.style.transform = 'translateX(320px)';
+          cartRef.current.style.transform = 'translateX(100%)';
           setTimeout(() => resolve(true), TRANSITION_LENGTH);
         } catch (err) {
           reject(err);
