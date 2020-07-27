@@ -153,11 +153,13 @@ const ProductPage = ({ data }) => {
           />
         </div>
       </div>
-      <div className={styles.details}>
-        <h2 className={styles.heading}>Sizing chart</h2>
-        <SizingChart />
-      </div>
-      
+      {product.productType && product.productType === "shirt" ? (
+        <div className={styles.details}>
+          <h2 className={styles.heading}>Sizing chart</h2>
+          <SizingChart />
+        </div>
+        ) : (" ")
+      }
     </Layout>
   );
 };
