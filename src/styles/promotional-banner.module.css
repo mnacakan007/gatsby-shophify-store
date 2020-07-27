@@ -1,0 +1,25 @@
+.container {
+  box-sizing: border-box;
+  --backgroundColor: #00DC9F;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90vw;
+  width: 1100px;
+  border: 5px solid var(--color-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1em 3em;
+  background-color: var(--backgroundColor);
+  color: var(--color-black);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.legal {
+  opacity: 0.7;
+}
