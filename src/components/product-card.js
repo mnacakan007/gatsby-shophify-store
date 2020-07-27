@@ -50,7 +50,8 @@ const BuyButton = ({ variants, slug }) => {
     });
   };
 
-  const availableForSale = variants[0].availableForSale;
+  // Make sure there's at least one variant available in stock
+  const availableForSale = variants.find(variant => variant.availableForSale);
   if (!availableForSale) {
     return (
       <div className={styles.outOfStock}>
