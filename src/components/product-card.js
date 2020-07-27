@@ -8,6 +8,7 @@ import styles from '../styles/product-card.module.css';
 
 const BuyButton = ({ variants, slug }) => {
   const ref = useRef();
+
   const { addItemToCart } = useCart();
   const lowestPrice = variants.sort(
     (a, b) => a.priceV2.amount - b.priceV2.amount,
@@ -49,6 +50,15 @@ const BuyButton = ({ variants, slug }) => {
     });
   };
 
+  const availableForSale = variants[0].availableForSale;
+  if (!availableForSale) {
+    return (
+      <div className={styles.outOfStock}>
+        Out of stock
+      </div>
+    )
+  }
+
   return (
     <button ref={ref} className={styles.button} onClick={handleClick}>
       {variants.length > 1
@@ -60,6 +70,7 @@ const BuyButton = ({ variants, slug }) => {
 };
 
 const ProductCard = ({ product }) => {
+
   // don’t display products without images
   if (!product.variants[0]?.image?.localFile?.childImageSharp?.fluid) {
     return null;

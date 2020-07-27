@@ -94,6 +94,21 @@
   position: relative;
   padding: 6px 0.5rem;
   width: auto;
+  transition: background 100ms linear;
+}
+
+.button:hover {
+  background-color: var(--color-gray-4);
+}
+
+.out-of-stock {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  color: var(--color-gray-3);
+  border: 2px solid var(--color-gray-4);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 6px 0.5rem;
 }
 
 .tooltip {

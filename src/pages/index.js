@@ -18,10 +18,10 @@ export const query = graphql`
           slug
           productType
           description
-          availableForSale
           variants {
             shopifyId
             title
+            availableForSale
             image {
               localFile {
                 childImageSharp {

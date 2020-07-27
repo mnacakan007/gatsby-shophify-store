@@ -47,6 +47,7 @@ const ProductPage = ({ data }) => {
   const needsSizing = product.variants.length > 1;
 
   const firstVariant = product.variants[0];
+  const availableForSale = firstVariant.availableForSale;
   const currency = firstVariant.priceV2.currencyCode;
   const price = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -122,22 +123,31 @@ const ProductPage = ({ data }) => {
               />
             )}
 
-            <div className={styles.formRow}>
-              <label htmlFor="quantity">Quantity</label>
-              <input
-                name="quantity"
-                id="quantity"
-                type="number"
-                min={1}
-                defaultValue={1}
-                className={styles.quantity}
-              />
-            </div>
+            {availableForSale ? (
+              <Fragment>
+                <div className={styles.formRow}>
+                  <label htmlFor="quantity">Quantity</label>
+                  <input
+                    name="quantity"
+                    id="quantity"
+                    type="number"
+                    min={1}
+                    defaultValue={1}
+                    className={styles.quantity}
+                  />
+                </div>
 
-            <button type="submit" className={styles.button}>
-              <img src={Cart} alt="" className={styles.icon} />
-              Add to Cart
-            </button>
+                <button type="submit" className={styles.button}>
+                  <img src={Cart} alt="" className={styles.icon} />
+                  Add to Cart
+                </button>
+              </Fragment>
+            ) : (
+              <div className={styles.outOfStock}>
+                Out of stock
+              </div>
+            )
+            }
           </form>
         </div>
         <div className={styles.productDetailsImageContainer}>
