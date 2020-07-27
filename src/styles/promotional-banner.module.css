@@ -1,6 +1,7 @@
 .container {
+  --background-color: #00DC9F;
+  --text-color: var(--color-black);
   box-sizing: border-box;
-  --backgroundColor: #00DC9F;
   margin-left: auto;
   margin-right: auto;
   max-width: 90vw;
@@ -9,8 +10,9 @@
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   padding: 1em 3em;
-  background-color: var(--backgroundColor);
-  color: var(--color-black);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin-top: 2em;
 }
 
 .heading {
