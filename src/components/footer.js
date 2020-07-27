@@ -10,6 +10,11 @@ export function Footer() {
         Shipping & Returns policy
       </Link>
 
+      <h4 className={styles.heading}>Contact us</h4>
+      <Link className={styles.link} to="mailto:swagstore@netlify.com">
+        swagstore@netlify.com
+      </Link>
+
       <h4 className={styles.heading}>Click This Link to Keep Us Safe</h4>
       <a
         className={styles.link}

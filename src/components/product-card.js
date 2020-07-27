@@ -18,6 +18,10 @@ const BuyButton = ({ variants, slug }) => {
     currency: lowestPrice.currencyCode,
   }).format(lowestPrice.amount);
 
+  const formattedPrice = () => {
+    return `${lowestPrice.currencyCode} ${formatted}`
+  }
+
   const showTooltip = () => {
     const floater = ref.current.querySelector('span');
 
@@ -48,8 +52,8 @@ const BuyButton = ({ variants, slug }) => {
   return (
     <button ref={ref} className={styles.button} onClick={handleClick}>
       {variants.length > 1
-        ? `Buy from ${formatted}`
-        : `Add to Cart for ${formatted}`}
+        ? `Buy from ${formattedPrice()}`
+        : `Add to Cart for ${formattedPrice()}`}
       <span className={styles.tooltip}>Added!</span>
     </button>
   );
