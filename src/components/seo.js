@@ -19,9 +19,9 @@ const SEO = ({ metadata }) => {
   
   const defaults = data.site.siteMetadata;
 
-  const title = metadata?.title ? `${metadata?.title} - ${defaults.title}` : defaults.title;
-  const description = metadata?.description ? `${metadata?.description} Check this product and more at the Netlify Swag Store` : defaults.description;
-  const ogimage = metadata?.images[0] ? metadata?.images[0].localFile.childImageSharp.fluid.src : defaults.ogimage;
+  const title = metadata.title ? `${metadata.title} - ${defaults.title}` : defaults.title;
+  const description = metadata.description ? `${metadata.description} Check this product and more at the Netlify Swag Store` : defaults.description;
+  const ogimage = metadata.images ? metadata.images[0].localFile.childImageSharp.fluid.src : defaults.ogimage;
 
   return (
     <Helmet>
