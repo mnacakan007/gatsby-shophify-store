@@ -34,10 +34,7 @@ export const query = graphql`
           amount
           currencyCode
         }
-        compareAtPriceV2 {
-          amount
-          currencyCode
-        }
+        
         title
       }
       productType
