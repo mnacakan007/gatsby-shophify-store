@@ -189,6 +189,7 @@ const Cart = () => {
       new Promise((resolve, reject) => {
         try {
           cartRef.current.style.transform = 'translateX(0)';
+          cartRef.current.style.display = "block";
           setTimeout(() => resolve(true), TRANSITION_LENGTH);
         } catch (err) {
           reject(err);
@@ -203,6 +204,7 @@ const Cart = () => {
         try {
           cartRef.current.style.transform = 'translateX(100%)';
           setTimeout(() => resolve(true), TRANSITION_LENGTH);
+          cartRef.current.style.display = "none";
         } catch (err) {
           reject(err);
         }

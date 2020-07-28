@@ -45,16 +45,12 @@
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 35px 1fr 70px 20px;
-  padding: 0.5rem 0.25rem;
+  padding: 1.5rem 0.25rem;
   text-align: left;
 }
 
 .item:first-of-type {
   border-top: 0;
-}
-
-.item:hover .remove {
-  opacity: 1;
 }
 
 .item img {

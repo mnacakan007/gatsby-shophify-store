@@ -79,24 +79,25 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className={styles.card}>
-      <Link to={`/product/${product.slug}`}>
-        <Image
-          fluid={product.variants[0]?.image?.localFile?.childImageSharp?.fluid}
-          alt={product.title}
-          className={styles.image}
-        />
+      <Link to={`/product/${product.slug}`} className={styles.cardLink}>
+        <span className="sr-only">{product.title}</span>
       </Link>
+      <Image
+        fluid={product.variants[0]?.image?.localFile?.childImageSharp?.fluid}
+        alt={product.title}
+        className={styles.image}
+      />
       <h3 className={styles.heading}>
-        <Link to={`/product/${product.slug}`}>{product.title}</Link>
+        {product.title}
       </h3>
       <p className={styles.description}>{product.description}</p>
       <div className={styles.buttons}>
         <div>
           <BuyButton variants={product.variants} slug={product.slug} />
         </div>
-        <Link to={`/product/${product.slug}`} className={styles.details}>
-          Details &rarr;
-        </Link>
+        <span className={styles.details}>
+          Details <span aria-hidden="true">&rarr;</span>
+        </span>
       </div>
       {product.productType && <ProductTypeLabel className={styles.label} type={product.productType} />}
     </div>

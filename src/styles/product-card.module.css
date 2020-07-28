@@ -90,11 +90,11 @@
   font-family: var(--font-sans-serif);
   font-size: 1rem;
   font-weight: 700;
-  outline: 0;
   position: relative;
   padding: 6px 0.5rem;
   width: auto;
   transition: background 100ms linear;
+  z-index: 3;
 }
 
 .button:hover {
@@ -127,6 +127,19 @@
 
 .visible .tooltip {
   animation: tip 1s ease-out;
+}
+
+.card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.card-link:focus {
+  box-shadow: inset 0px 0px 0 3px salmon;
 }
 
 @keyframes tip {
