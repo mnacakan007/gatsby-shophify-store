@@ -73,7 +73,17 @@ const CartButton = ({ state, send }) => {
   return (
     <button onClick={handleClick} className={styles.toggle}>
       <img src={CartIcon} alt="" className={styles.icon} />
-      <span>{state.matches('open') ? <span>&times;</span> : count}</span>
+      {state.matches('open') ? (
+        <Fragment>
+          <span className="sr-only">Close cart</span>
+          <span aria-hidden="true">&times;</span>
+        </Fragment>
+        ) : (
+          <Fragment>
+            <span className="sr-only">Open cart, </span> {count} <span className="sr-only">items</span>
+          </Fragment>
+        )
+      }
     </button>
   );
 };
@@ -105,7 +115,7 @@ const CartItems = ({ items }) => {
             <div>
               <img
                 src={item.variant.image.src}
-                alt={item.variant.image.altText}
+                alt={item.variant.image.altText ? item.variant.image.altText : ""}
               />
             </div>
             <div>
@@ -114,19 +124,20 @@ const CartItems = ({ items }) => {
                 {size}
               </p>
               <p className={styles.priceline}>
-                {unitPrice} &times; {item.quantity}
+                <span className="sr-only">Item price: </span>{unitPrice} &times; <span className="sr-only">Quantity: </span>{item.quantity}
               </p>
             </div>
             <div>
-              <p className={styles.subtotal}>{subtotal}</p>
+              <p className={styles.subtotal}>
+                <span className="sr-only">Item total price: </span>{subtotal}</p>
             </div>
             <div className={styles.wrap}>
               <button
                 onClick={() => removeItemFromCart(item.id)}
-                title="Remove this item from your cart"
                 className={styles.remove}
               >
-                &times;
+                <span className="sr-only">Remove {item.title} from your cart</span>
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
           </li>
