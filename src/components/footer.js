@@ -5,40 +5,41 @@ import styles from '../styles/footer.module.css';
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <h3 className={styles.heading}>Credits</h3>
-      <h4 className={styles.heading}>Most Clicked Link in the Footer</h4>
-      <Link className={styles.link} to="/pages/shipping-and-return-policy">
-        Shipping & Returns policy
-      </Link>
-
-      <h4 className={styles.heading}>Contact us</h4>
-      <Link className={styles.link} to="mailto:swagstore@netlify.com">
-        swagstore@netlify.com
-      </Link>
-
-      <h4 className={styles.heading}>Click This Link to Keep Us Safe</h4>
-      <a
-        className={styles.link}
-        href="https://community-docs.netlify.com/code-of-conduct.html"
-      >
-        Community Code of Conduct
-      </a>
-
-      <h4 className={styles.heading}>Executive Producer</h4>
-      <a className={styles.link} href="https://www.netlify.com/">
-        Netlify
-      </a>
-
-      <h4 className={styles.heading}>Starring</h4>
-      <a
-        className={styles.link}
-        href="https://github.com/netlify/swag-site/graphs/contributors"
-      >
-        Contributors
-      </a>
-      <a className={styles.link} href="https://github.com/netlify/swag-site">
-        You?
-      </a>
+      <h3 className={styles.sectionHeading}>Credits</h3>
+      <nav>
+        <ul className={styles.nav}>
+          <li>
+            <strong className={styles.heading}>Most important link</strong>
+            <Link className={styles.link} to="/pages/shipping-and-return-policy">
+              Shipping & Returns policy
+            </Link>
+          </li>
+          <li>
+            <strong className={styles.heading}>Contact us</strong>
+            <Link className={styles.link} to="mailto:contact@swag.netlify.com">
+              contact@swag.netlify.com
+            </Link>
+          </li>
+          <li>
+            <strong className={styles.heading}>Click this link to keep us safe</strong>
+            <Link className={styles.link} to="https://community-docs.netlify.com/code-of-conduct.html">
+              Community Code of Conduct
+            </Link>
+          </li>
+          <li>
+            <strong className={styles.heading}>Executive Producer</strong>
+            <Link className={styles.link} to="https://www.netlify.com/">
+              Netlify
+            </Link>
+          </li>
+          <li>
+            <strong className={styles.heading}>Starring</strong>
+            <Link className={styles.link} to="https://github.com/netlify/swag-site/graphs/contributors">
+              Contributors
+            </Link>
+          </li>
+        </ul>  
+      </nav>
     </footer>
   );
 }
