@@ -16,9 +16,9 @@ export function Footer() {
           </li>
           <li>
             <strong className={styles.heading}>Contact us</strong>
-            <Link className={styles.link} to="mailto:contact@swag.netlify.com">
+            <a className={styles.link} href="mailto:contact@swag.netlify.com">
               contact@swag.netlify.com
-            </Link>
+            </a>
           </li>
           <li>
             <strong className={styles.heading}>Click this link to keep us safe</strong>

@@ -23,7 +23,7 @@ const Page = ({ data }) => {
   return (
     <Layout>
       <div className={styles.container}>
-        <h1>{page.title}</h1>
+        <h1 className={styles.heading}>{page.title}</h1>
         {body}
       </div>
     </Layout>
