@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import Image from 'gatsby-image';
 import Layout from '../components/layout';
 import ProductTypeLabel from '../components/product-type-label';
@@ -34,7 +34,6 @@ export const query = graphql`
           amount
           currencyCode
         }
-        
         title
       }
       productType
@@ -165,6 +164,10 @@ const ProductPage = ({ data }) => {
             )
             }
           </form>
+
+          <Link to={`/pages/shipping-and-return-policy`} className={styles.shippingAndReturnsPolicy}>
+            Shipping and returns policy
+          </Link>
         </div>
         <div className={styles.productDetailsImageContainer}>
           {product.productType &&

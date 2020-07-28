@@ -99,6 +99,18 @@
   margin: 0 0.5em;
 }
 
+.shipping-and-returns-policy {
+  color: var(--color-teal-dark);
+  display: inline-block;
+  margin-top: 1em;
+  font-size: 0.85em;
+}
+
+.shipping-and-returns-policy:hover {
+  text-decoration: none;
+}
+
+
 
 .icon {
   margin-right: 0.25rem;
