@@ -35,6 +35,7 @@ module.exports = {
   siteMetadata: {
     title: "Netlify Swag Store",
     description: "Default meta description",
+    ogimage: "/ogimage.jpg",
     siteUrl: "https://swag.netlify.com",
   },
 };
