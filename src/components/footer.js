@@ -21,22 +21,16 @@ export function Footer() {
             </a>
           </li>
           <li>
-            <strong className={styles.heading}>Click this link to keep us safe</strong>
-            <Link className={styles.link} to="https://community-docs.netlify.com/code-of-conduct.html">
-              Community Code of Conduct
-            </Link>
-          </li>
-          <li>
             <strong className={styles.heading}>Executive Producer</strong>
-            <Link className={styles.link} to="https://www.netlify.com/">
+            <a className={styles.link} href="https://www.netlify.com/">
               Netlify
-            </Link>
+            </a>
           </li>
           <li>
             <strong className={styles.heading}>Starring</strong>
-            <Link className={styles.link} to="https://github.com/netlify/swag-site/graphs/contributors">
+            <a className={styles.link} href="https://github.com/netlify/swag-site/graphs/contributors">
               Contributors
-            </Link>
+            </a>
           </li>
         </ul>  
       </nav>

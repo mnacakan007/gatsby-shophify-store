@@ -5,3 +5,8 @@
 
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
+
+[[redirects]]
+  from = "/product"
+  to = "/"
+  status = 301

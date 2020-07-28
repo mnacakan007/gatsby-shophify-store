@@ -72,7 +72,7 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO product={{...product }}/>
+      <SEO metadata={{...product }}/>
       <div className={styles.details}>
         <div className={styles.productDetailsContentContainer}>
           <h1 className={styles.heading}>{product.title}</h1>

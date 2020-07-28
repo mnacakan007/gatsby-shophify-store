@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from "gatsby";
 
-const SEO = ({ product }) => {
+const SEO = ({ metadata }) => {
   const data = useStaticQuery(graphql`
     {
       site {
@@ -13,11 +13,13 @@ const SEO = ({ product }) => {
       }
     }
   `);
+
+  console.log(metadata);
   
   const defaults = data.site.siteMetadata;
 
-  const title = product?.title || defaults.title;
-  const description = product?.description || defaults.description;
+  const title = metadata?.title ? `${metadata?.title} - ${defaults.title}` : defaults.title;
+  const description = metadata?.description ? `${metadata?.description} Check this product and more at the Netlify Swag Store` : defaults.description;
 
   return (
     <Helmet>
@@ -31,9 +33,6 @@ const SEO = ({ product }) => {
       <meta name="twitter:description" content={description} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-
-      <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
-      <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
     </Helmet>
   );
 };

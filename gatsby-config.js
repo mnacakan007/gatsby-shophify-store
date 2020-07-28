@@ -6,6 +6,7 @@ module.exports = {
   plugins: [
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
+    "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -23,9 +24,17 @@ module.exports = {
         includeCollections: ["shop", "content"],
       },
     },
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        // replace "UA-XXXXXXXXX-X" with your own Tracking ID
+        trackingId: "UA-XXXXXXXXX-X",
+      },
+    },
   ],
   siteMetadata: {
     title: "Netlify Swag Store",
     description: "Default meta description",
+    siteUrl: "https://swag.netlify.com",
   },
 };
