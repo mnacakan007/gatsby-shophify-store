@@ -5,9 +5,15 @@ import styles from '../styles/footer.module.css';
 export function Footer() {
   return (
     <footer className={styles.footer}>
+      <h3 className={styles.heading}>Credits</h3>
       <h4 className={styles.heading}>Most Clicked Link in the Footer</h4>
       <Link className={styles.link} to="/pages/shipping-and-return-policy">
         Shipping & Returns policy
+      </Link>
+
+      <h4 className={styles.heading}>Contact us</h4>
+      <Link className={styles.link} to="mailto:swagstore@netlify.com">
+        swagstore@netlify.com
       </Link>
 
       <h4 className={styles.heading}>Click This Link to Keep Us Safe</h4>

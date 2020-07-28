@@ -73,7 +73,17 @@ const CartButton = ({ state, send }) => {
   return (
     <button onClick={handleClick} className={styles.toggle}>
       <img src={CartIcon} alt="" className={styles.icon} />
-      <span>{state.matches('open') ? <span>&times;</span> : count}</span>
+      {state.matches('open') ? (
+        <Fragment>
+          <span className="sr-only">Close cart</span>
+          <span aria-hidden="true">&times;</span>
+        </Fragment>
+        ) : (
+          <Fragment>
+            <span className="sr-only">Open cart, </span> {count} <span className="sr-only">items</span>
+          </Fragment>
+        )
+      }
     </button>
   );
 };
@@ -105,7 +115,7 @@ const CartItems = ({ items }) => {
             <div>
               <img
                 src={item.variant.image.src}
-                alt={item.variant.image.altText}
+                alt={item.variant.image.altText ? item.variant.image.altText : ""}
               />
             </div>
             <div>
@@ -114,19 +124,20 @@ const CartItems = ({ items }) => {
                 {size}
               </p>
               <p className={styles.priceline}>
-                {unitPrice} &times; {item.quantity}
+                <span className="sr-only">Item price: </span>{unitPrice} &times; <span className="sr-only">Quantity: </span>{item.quantity}
               </p>
             </div>
             <div>
-              <p className={styles.subtotal}>{subtotal}</p>
+              <p className={styles.subtotal}>
+                <span className="sr-only">Item total price: </span>{subtotal}</p>
             </div>
             <div className={styles.wrap}>
               <button
                 onClick={() => removeItemFromCart(item.id)}
-                title="Remove this item from your cart"
                 className={styles.remove}
               >
-                &times;
+                <span className="sr-only">Remove {item.title} from your cart</span>
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
           </li>
@@ -150,24 +161,11 @@ const CartWrapper = forwardRef((_, ref) => {
         <Fragment>
           <CartItems items={checkout.lineItems} />
           <ul className={styles.totals}>
-            <li>
-              <span>Subtotal:</span>
-              <span>
-                {format(checkout.subtotalPriceV2.currencyCode)(
-                  checkout.subtotalPriceV2.amount,
-                )}
-              </span>
-            </li>
-            <li>
-              <span>Tax:</span>
-              <span>
-                {format(checkout.totalTaxV2.currencyCode)(
-                  checkout.totalTaxV2.amount,
-                )}
-              </span>
+            <li className={styles.taxesAndShipping}>
+              <span>Taxes and Shipping calculated at checkout</span>
             </li>
             <li className={styles.total}>
-              <span>Total:</span>
+              <span>Subtotal:</span>
               <span>
                 {format(checkout.totalPriceV2.currencyCode)(
                   checkout.totalPriceV2.amount,
@@ -191,6 +189,7 @@ const Cart = () => {
       new Promise((resolve, reject) => {
         try {
           cartRef.current.style.transform = 'translateX(0)';
+          cartRef.current.style.display = "block";
           setTimeout(() => resolve(true), TRANSITION_LENGTH);
         } catch (err) {
           reject(err);
@@ -203,8 +202,9 @@ const Cart = () => {
     () =>
       new Promise((resolve, reject) => {
         try {
-          cartRef.current.style.transform = 'translateX(320px)';
+          cartRef.current.style.transform = 'translateX(100%)';
           setTimeout(() => resolve(true), TRANSITION_LENGTH);
+          cartRef.current.style.display = "none";
         } catch (err) {
           reject(err);
         }

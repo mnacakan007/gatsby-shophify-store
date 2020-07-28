@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import { CollectionListings } from '../components/collection-listings';
 import { HomeIntro } from '../components/home-intro';
+import { PromotionalBanner } from '../components/promotional-banner';
 
 export const query = graphql`
   {
@@ -17,10 +18,10 @@ export const query = graphql`
           slug
           productType
           description
-          availableForSale
           variants {
             shopifyId
             title
+            availableForSale
             image {
               localFile {
                 childImageSharp {
@@ -70,6 +71,7 @@ export default ({ data }) => {
   const { title, body } = data.shopifyPage;
   return (
     <Layout home>
+      <PromotionalBanner />
       <HomeIntro title={title} body={body} />
       <CollectionListings collection={promotionalProducts[0]} />
       <CollectionListings collection={allProducts[0]} />
