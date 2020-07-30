@@ -34,7 +34,7 @@ module.exports = {
     },
   ],
   siteMetadata: {
-    title: "Netlify Swag Store",
+    title: "Netlify Store - Awesome Apparel, Stickers, and Other Swag",
     description: "Default meta description",
     ogimage: "/ogimage.jpg",
     siteUrl: "https://swag.netlify.com",
