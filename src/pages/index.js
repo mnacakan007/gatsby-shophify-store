@@ -73,7 +73,9 @@ export default ({ data }) => {
     <Layout home>
       <PromotionalBanner />
       <HomeIntro title={title} body={body} />
-      <CollectionListings collection={promotionalProducts[0]} />
+      <div id="promo">
+        <CollectionListings collection={promotionalProducts[0]} />
+      </div>
       <CollectionListings collection={allProducts[0]} />
     </Layout>
   );

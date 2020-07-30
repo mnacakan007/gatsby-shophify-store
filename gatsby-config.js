@@ -12,12 +12,12 @@ module.exports = {
       resolve: "gatsby-plugin-sitemap",
       options: {
         serialize: ({ site, allSitePage }) =>
-          allSitePage.edges.map(edge => {
+          allSitePage.edges.map((edge) => {
             return {
               url: site.siteMetadata.siteUrl + edge.node.path,
-            }
+            };
           }),
-      }
+      },
     },
     {
       resolve: "gatsby-source-filesystem",
@@ -43,10 +43,20 @@ module.exports = {
         trackingId: "UA-XXXXXXXXX-X",
       },
     },
+    {
+      resolve: "gatsby-plugin-google-fonts",
+      options: {
+        fonts: [
+          "roboto\:400,700", // you can also specify font weights and styles
+        ],
+        display: "swap",
+      },
+    },
   ],
   siteMetadata: {
     title: "Netlify Store - Awesome Apparel, Stickers, and Other Swag",
-    description: "Netlify socks, stickers, shirts, mugs, and much more! Check out the store for official Netliswag and Jamstack gear. PS - plz share with other devs.",
+    description:
+      "Netlify socks, stickers, shirts, mugs, and much more! Check out the store for official Netliswag and Jamstack gear. PS - plz share with other devs.",
     ogimage: "/ogimage.jpg",
     siteUrl: "https://swag.netlify.com",
   },
