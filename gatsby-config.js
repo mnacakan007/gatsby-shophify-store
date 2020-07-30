@@ -47,7 +47,7 @@ module.exports = {
       resolve: "gatsby-plugin-google-fonts",
       options: {
         fonts: [
-          "roboto\:400,700", // you can also specify font weights and styles
+          "roboto:400,700", // you can also specify font weights and styles
         ],
         display: "swap",
       },
@@ -57,7 +57,7 @@ module.exports = {
     title: "Netlify Store - Awesome Apparel, Stickers, and Other Swag",
     description:
       "Netlify socks, stickers, shirts, mugs, and much more! Check out the store for official Netliswag and Jamstack gear. PS - plz share with other devs.",
-    ogimage: "/ogimage.jpg",
+    ogimage: "/ogimage.png",
     siteUrl: "https://swag.netlify.com",
   },
 };
