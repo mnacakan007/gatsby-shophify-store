@@ -80,7 +80,3 @@ body {
 *:focus {
   outline: salmon solid 3px;
 }
-
-.gatsby-image-wrapper {
-  height: 100%;
-}
