@@ -39,7 +39,6 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        // replace "UA-XXXXXXXXX-X" with your own Tracking ID
         trackingId: "UA-42258181-4",
       },
     },
@@ -47,7 +46,7 @@ module.exports = {
       resolve: "gatsby-plugin-google-fonts",
       options: {
         fonts: [
-          "roboto:400,700", // you can also specify font weights and styles
+          "roboto:400,700",
         ],
         display: "swap",
       },

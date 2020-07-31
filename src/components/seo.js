@@ -43,6 +43,8 @@ const SEO = ({ metadata }) => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
 
+      <meta name="google-site-verification" content="RMV-cjpAWkM-B69Nn0Pc-3hqjZzD8rKr6zpzm0Zhlak" />
+
       <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
       <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
     </Helmet>
