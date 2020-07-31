@@ -39,15 +39,13 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        trackingId: "UA-42258181-4",
+        trackingId: "UA-42258181-24",
       },
     },
     {
       resolve: "gatsby-plugin-google-fonts",
       options: {
-        fonts: [
-          "roboto:400,700",
-        ],
+        fonts: ["roboto:400,700"],
         display: "swap",
       },
     },
