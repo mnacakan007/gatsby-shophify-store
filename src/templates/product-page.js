@@ -9,6 +9,8 @@ import styles from '../styles/product-details.module.css';
 import SEO from '../components/seo';
 import { SizingChart } from '../components/sizing-chart';
 
+import SelectArrow from "../components/select-arrow";
+
 export const query = graphql`
   query($productID: String) {
     shopifyProduct(id: { eq: $productID }) {
@@ -73,7 +75,7 @@ const ProductPage = ({ data }) => {
   return (
     <Layout>
       <SEO metadata={{...product }}/>
-      <div className={styles.details}>
+      <div className={`${styles.details} ${styles.detailsProduct}`}>
         <div className={styles.productDetailsContentContainer}>
           <h1 className={styles.heading}>{product.title}</h1>
           <p className={styles.price}>
@@ -129,6 +131,7 @@ const ProductPage = ({ data }) => {
                       </option>
                     ))}
                 </select>
+                <SelectArrow />
               </div>
             ) : (
               <input
