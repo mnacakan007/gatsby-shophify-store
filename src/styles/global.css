@@ -70,10 +70,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 html,
 body {
   color: var(--color-gray-2);

@@ -18,7 +18,7 @@
 
 .heading {
   font-family: var(--font-display);
-  font-size: 3rem;
+  font-size: clamp(2em, 4vw, 3.1em);
   font-weight: 400;
   line-height: 1;
   margin-top: 0.1em;
@@ -47,11 +47,12 @@
 }
 
 .badge {
-  clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%);
   margin-left: -3rem;
   display: inline-block;
   background-color: #EFFF8E;
   font-size: 1.75em;
+  font-size: clamp(1.4em,4vw,1.75em);
   font-weight: 700;
   padding: 0.35em 3rem;
 }
@@ -62,7 +63,7 @@
   border-radius: var(--border-radius);
   color: var(--color-black);
   font-family: var(--font-sans-serif);
-  font-size: 1.2rem;
+  font-size: clamp(1em, 4vw, 1.2em);
   font-weight: 700;
   position: relative;
   padding: 0.5em;
@@ -76,4 +77,39 @@
 .button:hover {
   color: white;
   background-color: var(--color-black);
+}
+
+.button svg {
+  transform: rotate(90deg);
+  fill: currentColor;
+  width: 0.9em;
+  height: auto;
+  margin-left: 0.3em;
+  margin-top: -1px;
+}
+
+@media (max-width: 750px) /* > 600px */ {
+  
+  .badge {
+    clip-path: polygon(0 0, 8% 50%, 0% 100%, 100% 100%, 92% 50%, 100% 0%);
+    margin: 0 0 0.5em 0;
+  }
+
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .image {
+    align-self: center;
+  }
+
+  .image img {
+    max-width: 29em;
+    width: 100%;
+  }
+
+  .content {
+    padding: 1.5em 0;
+  }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../styles/promotional-banner.module.css';
 import promoImg from "../assets/1ms-dev-promo-image.png";
+import Arrow from "./arrow";
 
 export function PromotionalBanner() {
   
@@ -17,6 +18,7 @@ export function PromotionalBanner() {
         </p>
         <a href="#promo" className={styles.button}>
           Shop now
+          <Arrow />
         </a>
       </div>
       <div className={styles.image}>

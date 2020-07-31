@@ -26,8 +26,6 @@ const Logo = () => {
         </radialGradient>
       </defs>
     </svg>
-
-
   );
 };
 
