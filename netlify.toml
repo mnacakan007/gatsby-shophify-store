@@ -6,6 +6,11 @@
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
 
+[dev]
+  command = "yarn run start"
+  publish = "dist"
+  functions = "functions"
+
 [[redirects]]
   from = "/product"
   to = "/"
