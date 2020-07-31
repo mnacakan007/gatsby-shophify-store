@@ -1,0 +1,21 @@
+.announcement-bar {
+  background-color: #d83661;
+  padding: 1em;
+  color: var(--color-white);
+  font-weight: bold;
+  text-align: center;
+}
+
+.promo {
+  font-family: var(--font-monospace);
+  padding: 0.2em 0.5em;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.link {
+  color: currentColor;
+}
+
+.link:hover {
+  text-decoration: none;
+}

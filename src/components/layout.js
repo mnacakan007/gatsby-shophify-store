@@ -1,6 +1,7 @@
 import React from 'react';
 import { Fragment } from 'react';
 import Header from './header';
+import AnnouncementBar from "./announcement-bar";
 import { Contributors } from './contributors';
 import styles from '../styles/layout.module.css';
 
@@ -11,6 +12,7 @@ import SEO from './seo.js';
 const Layout = ({ children, home = false }) => (
   <Fragment>
     <SEO />
+    <AnnouncementBar />
     <Header />
     <div className={styles.container}>
       <main className={home ? 'home' : ''}>{children}</main>
