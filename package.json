@@ -16,6 +16,7 @@
     "url": "https://github.com/netlify/swag-site"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0-0",
     "babel-preset-gatsby": "^0.5.4",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "html-react-parser": "^0.13.0",
