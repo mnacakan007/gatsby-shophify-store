@@ -6,6 +6,19 @@ module.exports = {
   plugins: [
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-react-helmet",
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        serialize: ({ site, allSitePage }) =>
+          allSitePage.edges.map((edge) => {
+            return {
+              url: site.siteMetadata.siteUrl + edge.node.path,
+            };
+          }),
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -23,9 +36,27 @@ module.exports = {
         includeCollections: ["shop", "content"],
       },
     },
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: "UA-42258181-4",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-google-fonts",
+      options: {
+        fonts: [
+          "roboto:400,700",
+        ],
+        display: "swap",
+      },
+    },
   ],
   siteMetadata: {
-    title: "Netlify Swag Store",
-    description: "Default meta description",
+    title: "Netlify Store - Awesome Apparel, Stickers, and Other Swag",
+    description:
+      "Netlify socks, stickers, shirts, mugs, and much more! Check out the store for official Netliswag and Jamstack gear. PS - plz share with other devs.",
+    ogimage: "/ogimage.png",
+    siteUrl: "https://swag.netlify.com",
   },
 };

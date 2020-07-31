@@ -18,8 +18,12 @@
   width: 90vw;
 }
 
+.details.details-product {
+  flex-wrap: nowrap;
+}
+
 .description {
-  font-weight: bold;
+  font-weight: 700;
   color: var(--color-gray-1);
   font-size: 1.15em;
 }
@@ -27,7 +31,7 @@
 .price {
   color: var(--color-gray-2);
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 700;
   margin: 0 0 2em 0;
 }
 
@@ -46,6 +50,7 @@
 .form-row {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .form-row label {
@@ -57,8 +62,17 @@
   border: 2px solid var(--color-gray-5);
   border-radius: var(--border-radius);
   font-size: 1rem;
-  padding: 0.5rem;
+  padding: 0.5em 1.5em 0.5em 0.5em;
   appearance: none;
+}
+
+.form-row svg {
+  position: absolute;
+  fill: var(--color-gray-3);
+  bottom: 1em;
+  right: 0.6em;
+  width: 0.8em;
+  pointer-events: none;
 }
 
 .quantity {
@@ -75,7 +89,7 @@
   border-radius: var(--border-radius);
   color: var(--color-white);
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 700;
   padding: 0.5rem 1em;
   transition: background 200ms, border 200ms;
 }
@@ -91,7 +105,7 @@
   color: var(--color-gray-3);
   border: 2px solid var(--color-gray-4);
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 700;
   padding: 0.5rem 1em;
 }
 
@@ -99,6 +113,16 @@
   margin: 0 0.5em;
 }
 
+.shipping-and-returns-policy {
+  color: var(--color-teal-dark);
+  display: inline-block;
+  margin-top: 1em;
+  font-size: 0.85em;
+}
+
+.shipping-and-returns-policy:hover {
+  text-decoration: none;
+}
 
 .icon {
   margin-right: 0.25rem;
@@ -117,9 +141,13 @@
 .product-details-image-container {
   position: relative;
   flex-basis: 25em;
+  margin-left: -0.5em;
 }
 
 @media (max-width: 51.625rem) /* < 700px */ {
+  .details.details-product {
+    flex-direction: column;
+  }
   .heading {
     font-size: 1.9em;
     margin-top: 1em;
@@ -144,7 +172,7 @@
 }
 
 .metafields dt {
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 0.2em;
 }
 

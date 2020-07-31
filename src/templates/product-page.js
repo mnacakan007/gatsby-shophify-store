@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import Image from 'gatsby-image';
 import Layout from '../components/layout';
 import ProductTypeLabel from '../components/product-type-label';
@@ -8,6 +8,8 @@ import { useCart } from '../context/cart-context';
 import styles from '../styles/product-details.module.css';
 import SEO from '../components/seo';
 import { SizingChart } from '../components/sizing-chart';
+
+import SelectArrow from "../components/select-arrow";
 
 export const query = graphql`
   query($productID: String) {
@@ -34,7 +36,6 @@ export const query = graphql`
           amount
           currencyCode
         }
-        
         title
       }
       productType
@@ -73,8 +74,8 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO product={{...product }}/>
-      <div className={styles.details}>
+      <SEO metadata={{...product }}/>
+      <div className={`${styles.details} ${styles.detailsProduct}`}>
         <div className={styles.productDetailsContentContainer}>
           <h1 className={styles.heading}>{product.title}</h1>
           <p className={styles.price}>
@@ -130,6 +131,7 @@ const ProductPage = ({ data }) => {
                       </option>
                     ))}
                 </select>
+                <SelectArrow />
               </div>
             ) : (
               <input
@@ -165,6 +167,10 @@ const ProductPage = ({ data }) => {
             )
             }
           </form>
+
+          <Link to={`/pages/shipping-and-return-policy`} className={styles.shippingAndReturnsPolicy}>
+            Shipping and returns policy
+          </Link>
         </div>
         <div className={styles.productDetailsImageContainer}>
           {product.productType &&

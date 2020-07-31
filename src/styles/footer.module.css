@@ -4,18 +4,48 @@
   color: var(--color-white);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   justify-content: center;
   padding-bottom: 10rem;
 }
 
+.section-heading {
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2em;
+}
+
 .heading {
+  display: block;
   font-size: 1.25rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5em;
 }
 
 .link {
   color: inherit;
   font-size: 0.875rem;
-  margin-bottom: 3rem;
+  
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+}
+
+.nav > li {
+  margin: 1em 2.5em;
+}
+
+@media (max-width: 37.5rem) /* > 600px */ {
+  .nav > li {
+    text-align: center;
+    width: 100%;
+  }
 }
