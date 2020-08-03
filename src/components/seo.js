@@ -29,16 +29,16 @@ const SEO = ({ metadata }) => {
       <meta name="description" content={description} />
       <meta itemprop="name" content={title} />
       <meta itemprop="description" content={description} />
-      <meta itemprop="image" content={ogimage} />
+      <meta itemprop="image" content={`https://swag.netlify.com${ogimage}`} />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content="@netlify" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:creator" content="@netlify" />
-      <meta name="twitter:image" content={ogimage} />
-      <meta name="og:image" content={ogimage} />
-      <meta name="og:image:secure_url" content={ogimage} />
-      <meta name="image" property="og:image" content={ogimage} />
+      <meta name="twitter:image" content={`https://swag.netlify.com${ogimage}`} />
+      <meta name="og:image" content={`https://swag.netlify.com${ogimage}`} />
+      <meta name="og:image:secure_url" content={`https://swag.netlify.com${ogimage}`} />
+      <meta name="image" property="og:image" content={`https://swag.netlify.com${ogimage}`} />
       <meta property="og:site_name" content="Netlify Store" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
