@@ -162,13 +162,17 @@ const CartWrapper = forwardRef((_, ref) => {
           <CartItems items={checkout.lineItems} />
           <ul className={styles.totals}>
             <li className={styles.taxesAndShipping}>
-              <span>Taxes and Shipping calculated at checkout</span>
+              <span>Taxes calculated at checkout</span>
+            </li>
+            <li>
+              <span>Shipping:</span>
+              <span>Free</span>
             </li>
             <li className={styles.total}>
               <span>Subtotal:</span>
               <span>
                 {format(checkout.totalPriceV2.currencyCode)(
-                  checkout.totalPriceV2.amount,
+                  checkout.totalPriceV2.amount
                 )}
               </span>
             </li>
