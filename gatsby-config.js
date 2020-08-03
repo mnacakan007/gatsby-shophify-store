@@ -54,7 +54,7 @@ module.exports = {
     title: "Netlify Store - Awesome Apparel, Stickers, and Other Swag",
     description:
       "Netlify socks, stickers, shirts, mugs, and much more! Check out the store for official Netliswag and Jamstack gear. PS - plz share with other devs.",
-    ogimage: "/ogimage.png",
+    ogimage: "https://swag.netlify.com/ogimage.png",
     siteUrl: "https://swag.netlify.com",
   },
 };
