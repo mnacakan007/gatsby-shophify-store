@@ -20,6 +20,7 @@ const SEO = ({ metadata }) => {
   const title = metadata?.title ? `${metadata.title} - Netlify Store` : defaults.title;
   const description = metadata?.description ? `${metadata.description} Check this product and more at the Netlify Store` : defaults.description;
   const ogimage = metadata?.images ? metadata.images[0].localFile.childImageSharp.fluid.src : defaults.ogimage;
+  const summary = metadata?.summary ? metadata.summary : "summary_large_image"
 
   return (
     <Helmet>
@@ -30,7 +31,7 @@ const SEO = ({ metadata }) => {
       <meta itemprop="name" content={title} />
       <meta itemprop="description" content={description} />
       <meta itemprop="image" content={`https://swag.netlify.com${ogimage}`} />
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content={summary} />
       <meta name="twitter:site" content="@netlify" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />

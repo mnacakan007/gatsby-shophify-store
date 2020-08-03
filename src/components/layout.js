@@ -7,11 +7,9 @@ import styles from '../styles/layout.module.css';
 
 import '../styles/global.css';
 import { Footer } from './footer';
-import SEO from './seo.js';
 
 const Layout = ({ children, home = false }) => (
   <Fragment>
-    <SEO />
     {/* <AnnouncementBar /> */}
     <Header />
     <div className={styles.container}>

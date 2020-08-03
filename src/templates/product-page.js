@@ -74,7 +74,7 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO metadata={{...product }}/>
+      <SEO metadata={{"summary": "summary", ...product }}/>
       <div className={`${styles.details} ${styles.detailsProduct}`}>
         <div className={styles.productDetailsContentContainer}>
           <h1 className={styles.heading}>{product.title}</h1>

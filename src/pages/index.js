@@ -4,6 +4,7 @@ import Layout from '../components/layout';
 import { CollectionListings } from '../components/collection-listings';
 import { HomeIntro } from '../components/home-intro';
 import { PromotionalBanner } from '../components/promotional-banner';
+import SEO from "../components/seo";
 
 export const query = graphql`
   {
@@ -71,6 +72,7 @@ export default ({ data }) => {
   const { title, body } = data.shopifyPage;
   return (
     <Layout home>
+      <SEO />
       <PromotionalBanner />
       <HomeIntro title={title} body={body} />
       <div id="promo">
