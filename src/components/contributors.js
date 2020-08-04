@@ -3,15 +3,15 @@ import styles from '../styles/contributors.module.css';
 
 // TODO load contributors from GitHub (all-contributors, maybe?)
 const contributors = [
-  'jlengstorf',
-  'rafaelconde',
-  'tzmanics',
-  'philhawksworth',
-  'sdras',
-  'shortdiv',
-  'marisamorby',
-  'amarilisd',
-  'ikristy',
+  "jlengstorf",
+  "rafaelconde",
+  "alex-netlify",
+  "scottmathson",
+  "bigash42",
+  "sdras",
+  "marisamorby",
+  "amarilisd",
+  "ikristy",
 ];
 
 export function Contributors() {
