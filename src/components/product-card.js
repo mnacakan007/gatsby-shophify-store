@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from "react";
 import { Link, navigate } from 'gatsby';
 import Image from 'gatsby-image';
 
@@ -6,8 +6,11 @@ import ProductTypeLabel from './product-type-label';
 import { useCart } from '../context/cart-context';
 import styles from '../styles/product-card.module.css';
 
-const BuyButton = ({ variants, slug }) => {
+const BuyButton = ({ variants, slug, title }) => {
+
   const ref = useRef();
+
+  const [liveRegionMessage, setLiveRegionMessage] = useState("");
 
   const { addItemToCart } = useCart();
   const lowestPrice = variants.sort(
@@ -44,6 +47,7 @@ const BuyButton = ({ variants, slug }) => {
     }
 
     showTooltip();
+    setLiveRegionMessage(`1 ${title} added to your cart!`);
     await addItemToCart({
       variantId: variants[0].shopifyId,
       quantity: 1,
@@ -60,13 +64,26 @@ const BuyButton = ({ variants, slug }) => {
     )
   }
 
+  
+
   return (
-    <button ref={ref} className={styles.button} onClick={handleClick}>
-      {variants.length > 1
-        ? `Buy from ${formattedPrice()}`
-        : `Add to Cart for ${formattedPrice()}`}
-      <span className={styles.tooltip}>Added!</span>
-    </button>
+    <div>
+      <button ref={ref} className={styles.button} onClick={handleClick}>
+        {variants.length > 1
+          ? `Buy from ${formattedPrice()}`
+          : `Add to Cart for ${formattedPrice()}`}
+        <span className={styles.tooltip}>Added!</span>
+      </button>
+      <span
+        role="log"
+        aria-live="assertive"
+        aria-relevant="all"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {liveRegionMessage}
+      </span>
+    </div>
   );
 };
 
@@ -93,7 +110,7 @@ const ProductCard = ({ product }) => {
       <p className={styles.description}>{product.description}</p>
       <div className={styles.buttons}>
         <div>
-          <BuyButton variants={product.variants} slug={product.slug} />
+          <BuyButton variants={product.variants} slug={product.slug} title={product.title} />
         </div>
         <span className={styles.details}>
           Details <span aria-hidden="true">&rarr;</span>
