@@ -88,7 +88,7 @@ const CartButton = ({ state, send }) => {
   );
 };
 
-const CartItems = ({ items }) => {
+const CartItems = ({ items, state }) => {
   const { removeItemFromCart } = useCart();
 
   if (!items) {
@@ -115,7 +115,9 @@ const CartItems = ({ items }) => {
             <div>
               <img
                 src={item.variant.image.src}
-                alt={item.variant.image.altText ? item.variant.image.altText : ""}
+                alt={
+                  item.variant.image.altText ? item.variant.image.altText : ""
+                }
               />
             </div>
             <div>
@@ -124,19 +126,26 @@ const CartItems = ({ items }) => {
                 {size}
               </p>
               <p className={styles.priceline}>
-                <span className="sr-only">Item price: </span>{unitPrice} &times; <span className="sr-only">Quantity: </span>{item.quantity}
+                <span className="sr-only">Item price: </span>
+                {unitPrice} &times; <span className="sr-only">Quantity: </span>
+                {item.quantity}
               </p>
             </div>
             <div>
               <p className={styles.subtotal}>
-                <span className="sr-only">Item total price: </span>{subtotal}</p>
+                <span className="sr-only">Item total price: </span>
+                {subtotal}
+              </p>
             </div>
             <div className={styles.wrap}>
               <button
                 onClick={() => removeItemFromCart(item.id)}
                 className={styles.remove}
+                tabIndex={state === "closed" ? "-1" : 0}
               >
-                <span className="sr-only">Remove {item.title} from your cart</span>
+                <span className="sr-only">
+                  Remove {item.title} from your cart
+                </span>
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -149,17 +158,22 @@ const CartItems = ({ items }) => {
 
 const CartWrapper = forwardRef((_, ref) => {
   const { checkout } = useCart();
+  const { state } = _;
 
   if (!checkout) return null;
 
   return (
-    <div ref={ref} className={styles.cart}>
+    <div
+      ref={ref}
+      className={styles.cart}
+      aria-hidden={state === "closed" ? "true" : false}
+    >
       <h3 className={styles.heading}>Your Cart</h3>
       {checkout.lineItems.length < 1 ? (
         <p className={styles.empty}>Your cart is empty.</p>
       ) : (
         <Fragment>
-          <CartItems items={checkout.lineItems} />
+          <CartItems items={checkout.lineItems} state={state} />
           <ul className={styles.totals}>
             <li className={styles.taxesAndShipping}>
               <span>Taxes calculated at checkout</span>
@@ -177,7 +191,11 @@ const CartWrapper = forwardRef((_, ref) => {
               </span>
             </li>
           </ul>
-          <a href={checkout.webUrl} className={styles.checkout}>
+          <a
+            href={checkout.webUrl}
+            className={styles.checkout}
+            tabIndex={state === "closed" ? "-1" : 0}
+          >
             Check Out
           </a>
         </Fragment>
@@ -193,7 +211,6 @@ const Cart = () => {
       new Promise((resolve, reject) => {
         try {
           cartRef.current.style.transform = 'translateX(0)';
-          cartRef.current.style.display = "block";
           setTimeout(() => resolve(true), TRANSITION_LENGTH);
         } catch (err) {
           reject(err);
@@ -208,7 +225,6 @@ const Cart = () => {
         try {
           cartRef.current.style.transform = 'translateX(100%)';
           setTimeout(() => resolve(true), TRANSITION_LENGTH);
-          cartRef.current.style.display = "none";
         } catch (err) {
           reject(err);
         }
