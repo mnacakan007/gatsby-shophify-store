@@ -31,7 +31,7 @@ export function PasswordLock({ handleCorrectPassword }) {
       }}
     >
       <label htmlFor="exclusivePassword" className={styles.label}>
-        What’s the password?
+        What's the password?
         <input
           className={styles.input}
           type="password"
