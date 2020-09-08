@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import { CollectionListings } from '../components/collection-listings';
 import { HomeIntro } from '../components/home-intro';
-import { PromotionalBanner } from '../components/promotional-banner';
+/* import { PromotionalBanner } from '../components/promotional-banner'; */
 import SEO from "../components/seo";
 
 export const query = graphql`
@@ -73,7 +73,7 @@ export default ({ data }) => {
   return (
     <Layout home>
       <SEO />
-      <PromotionalBanner />
+      {/* <PromotionalBanner /> */}
       <HomeIntro title={title} body={body} />
       <div id="promo">
         <CollectionListings collection={promotionalProducts[0]} />
