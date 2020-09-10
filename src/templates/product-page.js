@@ -1,17 +1,23 @@
-import React, { Fragment } from 'react';
-import { graphql, Link } from 'gatsby';
-import Image from 'gatsby-image';
-import Layout from '../components/layout';
-import ProductTypeLabel from '../components/product-type-label';
-import Cart from '../assets/cart.svg';
-import { useCart } from '../context/cart-context';
-import styles from '../styles/product-details.module.css';
-import SEO from '../components/seo';
+import React, { Fragment } from "react";
+import { graphql, Link } from "gatsby";
+import Image from "gatsby-image";
+import Layout from "../components/layout";
+import ProductTypeLabel from "../components/product-type-label";
+import Cart from "../assets/cart.svg";
+import { useCart } from "../context/cart-context";
+import styles from "../styles/product-details.module.css";
+import SEO from "../components/seo";
 import { SizingChartShirts, SizingChartJammies } from "../components/sizing-charts";
+import { PasswordLock } from "../components/password-lock";
+
 import SelectArrow from "../components/select-arrow";
+import { useAccess } from "../context/access-context";
 
 export const query = graphql`
   query($productID: String) {
+    shopifyCollection(products: { elemMatch: { id: { eq: $productID } } }) {
+      handle
+    }
     shopifyProduct(id: { eq: $productID }) {
       title
       description
@@ -42,56 +48,58 @@ export const query = graphql`
   }
 `;
 
-const formatPrice = ((amount, currency = "USD") => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
+const formatPrice = (amount, currency = "USD") => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
     currency: currency,
   }).format(amount);
-})
+};
 
-const ProductPage = ({ data }) => {
+const Product = ({ product }) => {
   const { addItemToCart } = useCart();
-  const product = data.shopifyProduct;
   const needsSizing = product.variants.length > 1;
 
   const firstVariant = product.variants[0];
-  const availableForSale = product.variants.find(variant => variant.availableForSale);
+  const availableForSale = product.variants.find(
+    (variant) => variant.availableForSale
+  );
   const currency = firstVariant.priceV2.currencyCode;
   const price = formatPrice(firstVariant.priceV2.amount);
-  const compareAtPrice = firstVariant.compareAtPriceV2 ? formatPrice(firstVariant.compareAtPriceV2.amount) : null;
+  const compareAtPrice = firstVariant.compareAtPriceV2
+    ? formatPrice(firstVariant.compareAtPriceV2.amount)
+    : null;
 
-  const metafields = product.metafields.filter(field => {
-    return field.key !== "Sizing Chart"
+  const metafields = product.metafields.filter((field) => {
+    return field.key !== "Sizing Chart";
   });
 
-  const sizingChart = product.metafields.filter(field => {
-    return field.key === "Sizing Chart"
+  const sizingChart = product.metafields.filter((field) => {
+    return field.key === "Sizing Chart";
   });
 
   const getSizingChart = (product) => {
     console.log(product);
-    if(product === "shirt") {
-      return <SizingChartShirts />
+    if (product === "shirt") {
+      return <SizingChartShirts />;
     }
     if (product === "jammies") {
       return <SizingChartJammies />;
     }
-  }
-
+  };
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const data = new FormData(event.target);
 
     addItemToCart({
-      variantId: data.get('variantId'),
-      quantity: data.get('quantity'),
+      variantId: data.get("variantId"),
+      quantity: data.get("quantity"),
     });
   };
 
   return (
-    <Layout>
-      <SEO metadata={{ summary: "summary", ...product }} />
+    <Fragment>
       <div className={`${styles.details} ${styles.detailsProduct}`}>
         <div className={styles.productDetailsContentContainer}>
           <h1 className={styles.heading}>{product.title}</h1>
@@ -209,6 +217,28 @@ const ProductPage = ({ data }) => {
         </div>
       ) : (
         " "
+      )}
+    </Fragment>
+  );
+};
+
+const ProductPage = ({ data }) => {
+  const { access, updateAccess } = useAccess();
+  const collection = data.shopifyCollection.handle;
+  const product = data.shopifyProduct;
+
+  // TODO centralize which collections are exclusive
+  const isProtectedCollection = ["netlify-exclusive"].includes(collection);
+
+  return (
+    <Layout>
+      {!isProtectedCollection || access ? (
+        <Fragment>
+          <SEO metadata={{ summary: "summary", ...product }} />
+          <Product product={product} />
+        </Fragment>
+      ) : (
+        <PasswordLock handleCorrectPassword={() => updateAccess(true)} />
       )}
     </Layout>
   );
