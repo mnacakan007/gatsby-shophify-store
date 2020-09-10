@@ -1,17 +1,19 @@
-import React, { Fragment } from 'react';
-import { graphql, Link } from 'gatsby';
-import Layout from '../components/layout';
-import ProductTypeLabel from '../components/product-type-label';
-import Cart from '../assets/cart.svg';
-import { useCart } from '../context/cart-context';
-import styles from '../styles/product-details.module.css';
-import SEO from '../components/seo';
-import { SizingChart } from '../components/sizing-chart';
-import { PasswordLock } from '../components/password-lock';
+
+import React, { Fragment } from "react";
+import { graphql, Link } from "gatsby";
+import Image from "gatsby-image";
+import Layout from "../components/layout";
+import ProductTypeLabel from "../components/product-type-label";
+import Cart from "../assets/cart.svg";
+import { useCart } from "../context/cart-context";
+import styles from "../styles/product-details.module.css";
+import SEO from "../components/seo";
+import { SizingChartShirts, SizingChartJammies } from "../components/sizing-charts";
+import { PasswordLock } from "../components/password-lock";
 import ProductPageThumbnail from '../components/product-page-thumbnail.js';
 
-import SelectArrow from '../components/select-arrow';
-import { useAccess } from '../context/access-context';
+import SelectArrow from "../components/select-arrow";
+import { useAccess } from "../context/access-context";
 
 export const query = graphql`
   query($productID: String) {
@@ -48,9 +50,9 @@ export const query = graphql`
   }
 `;
 
-const formatPrice = (amount, currency = 'USD') => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
+const formatPrice = (amount, currency = "USD") => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
     currency: currency,
   }).format(amount);
 };
@@ -61,7 +63,7 @@ const Product = ({ product }) => {
 
   const firstVariant = product.variants[0];
   const availableForSale = product.variants.find(
-    (variant) => variant.availableForSale,
+    (variant) => variant.availableForSale
   );
   const currency = firstVariant.priceV2.currencyCode;
   const price = formatPrice(firstVariant.priceV2.amount);
@@ -69,14 +71,32 @@ const Product = ({ product }) => {
     ? formatPrice(firstVariant.compareAtPriceV2.amount)
     : null;
 
+  const metafields = product.metafields.filter((field) => {
+    return field.key !== "Sizing Chart";
+  });
+
+  const sizingChart = product.metafields.filter((field) => {
+    return field.key === "Sizing Chart";
+  });
+
+  const getSizingChart = (product) => {
+    console.log(product);
+    if (product === "shirt") {
+      return <SizingChartShirts />;
+    }
+    if (product === "jammies") {
+      return <SizingChartJammies />;
+    }
+  };
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const data = new FormData(event.target);
 
     addItemToCart({
-      variantId: data.get('variantId'),
-      quantity: data.get('quantity'),
+      variantId: data.get("variantId"),
+      quantity: data.get("quantity"),
     });
   };
 
@@ -98,11 +118,11 @@ const Product = ({ product }) => {
             )}
           </p>
           <p className={styles.description}>{product.description}</p>
-          {product.metafields.length > 0 ? (
+          {metafields.length > 0 ? (
             <details className={styles.metafields}>
               <summary>Product details</summary>
               <dl>
-                {product.metafields.map((metafield) => {
+                {metafields.map((metafield) => {
                   return (
                     <Fragment>
                       <dt>{metafield.key}:</dt>
@@ -189,10 +209,10 @@ const Product = ({ product }) => {
           <ProductPageThumbnail images={product.images} />
         </div>
       </div>
-      {product.productType && product.productType === "shirt" ? (
+      {sizingChart.length > 0 ? (
         <div className={styles.details}>
           <h2 className={styles.heading}>Sizing chart</h2>
-          <SizingChart />
+          {getSizingChart(sizingChart[0].value)}
         </div>
       ) : (
         " "
@@ -207,13 +227,13 @@ const ProductPage = ({ data }) => {
   const product = data.shopifyProduct;
 
   // TODO centralize which collections are exclusive
-  const isProtectedCollection = ['netlify-exclusive'].includes(collection);
+  const isProtectedCollection = ["netlify-exclusive"].includes(collection);
 
   return (
     <Layout>
       {!isProtectedCollection || access ? (
         <Fragment>
-          <SEO metadata={{ summary: 'summary', ...product }} />
+          <SEO metadata={{ summary: "summary", ...product }} />
           <Product product={product} />
         </Fragment>
       ) : (

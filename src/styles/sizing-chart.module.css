@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   width: 100%;
   justify-content: center;
+  align-items: flex-start;
 }
 
 .container > * {
@@ -11,6 +12,11 @@
 
 .container table {
   flex-grow: 1;
+}
+
+.container img {
+  max-width: 23em;
+  height: auto;
 }
 
 .table {
