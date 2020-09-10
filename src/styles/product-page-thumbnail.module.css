@@ -37,6 +37,10 @@
   cursor: pointer;
 }
 
+.gallery button:focus {
+  outline: 1px solid white;
+}
+
 .gallery button:hover {
   border-color: rgba(255, 255, 255, 0.5);
 }
