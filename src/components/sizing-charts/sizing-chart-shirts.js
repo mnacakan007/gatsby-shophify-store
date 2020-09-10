@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from '../styles/sizing-chart.module.css';
-import shirt from '../assets/sizing-chart-shirt.svg'
+import styles from '../../styles/sizing-chart.module.css';
+import shirt from '../../assets/sizing-chart-shirt.svg';
 
-export function SizingChart() {
+export default function SizingChartShirts() {
   
   return (
     <div className={styles.container}>
-      <img src={shirt} alt="aaa" />
+      <img src={shirt} alt="Sizing guide for shirts" />
       <table className={styles.table}>
         <caption className="sr-only">Sizing chart</caption>
         <thead>

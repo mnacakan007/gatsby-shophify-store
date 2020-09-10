@@ -7,8 +7,7 @@ import Cart from '../assets/cart.svg';
 import { useCart } from '../context/cart-context';
 import styles from '../styles/product-details.module.css';
 import SEO from '../components/seo';
-import { SizingChart } from '../components/sizing-chart';
-
+import { SizingChartShirts, SizingChartJammies } from "../components/sizing-charts";
 import SelectArrow from "../components/select-arrow";
 
 export const query = graphql`
@@ -61,6 +60,25 @@ const ProductPage = ({ data }) => {
   const price = formatPrice(firstVariant.priceV2.amount);
   const compareAtPrice = firstVariant.compareAtPriceV2 ? formatPrice(firstVariant.compareAtPriceV2.amount) : null;
 
+  console.log(product.metafields);
+
+  const metafields = product.metafields.filter(field => {
+    return field.key !== "Sizing Chart"
+  });
+
+  const sizingChart = product.metafields.filter(field => {
+    return field.key === "Sizing Chart"
+  });
+
+  const getSizingChart = (product) => {
+    if(product === "shirt") {
+      return <SizingChartShirts />
+    }
+    if (product === "jammies") {
+      return <SizingChartJammies />;
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -74,7 +92,7 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO metadata={{"summary": "summary", ...product }}/>
+      <SEO metadata={{ summary: "summary", ...product }} />
       <div className={`${styles.details} ${styles.detailsProduct}`}>
         <div className={styles.productDetailsContentContainer}>
           <h1 className={styles.heading}>{product.title}</h1>
@@ -85,29 +103,29 @@ const ProductPage = ({ data }) => {
                 <del className={styles.priceOnSale}>{compareAtPrice}</del>
               </span>
             ) : (
-                <span>{currency} {price}</span>
-              )
-            }
+              <span>
+                {currency} {price}
+              </span>
+            )}
           </p>
           <p className={styles.description}>{product.description}</p>
-          {product.metafields.length > 0 ? (
+          {metafields.length > 0 ? (
             <details className={styles.metafields}>
               <summary>Product details</summary>
               <dl>
-                {product.metafields.map(metafield => {
+                {product.metafields.map((metafield) => {
                   return (
                     <Fragment>
                       <dt>{metafield.key}:</dt>
                       <dd>{metafield.value}</dd>
                     </Fragment>
-                  )
+                  );
                 })}
               </dl>
             </details>
           ) : (
             " "
           )}
-
 
           <form
             onSubmit={handleSubmit}
@@ -161,37 +179,38 @@ const ProductPage = ({ data }) => {
                 </button>
               </Fragment>
             ) : (
-              <div className={styles.outOfStock}>
-                Out of stock
-              </div>
-            )
-            }
+              <div className={styles.outOfStock}>Out of stock</div>
+            )}
           </form>
 
-          <Link to={`/pages/shipping-and-return-policy`} className={styles.shippingAndReturnsPolicy}>
+          <Link
+            to={`/pages/shipping-and-return-policy`}
+            className={styles.shippingAndReturnsPolicy}
+          >
             Shipping and returns policy
           </Link>
         </div>
         <div className={styles.productDetailsImageContainer}>
-          {product.productType &&
+          {product.productType && (
             <ProductTypeLabel
               type={product.productType}
               className={styles.productDetailsProductType}
             />
-          }
+          )}
           <Image
             fluid={product.images[0].localFile.childImageSharp.fluid}
             alt={product.title}
           />
         </div>
       </div>
-      {product.productType && product.productType === "shirt" ? (
+      {sizingChart.length > 0 ? (
         <div className={styles.details}>
           <h2 className={styles.heading}>Sizing chart</h2>
-          <SizingChart />
+          {getSizingChart(sizingChart.value)}
         </div>
-        ) : (" ")
-      }
+      ) : (
+        " "
+      )}
     </Layout>
   );
 };
