@@ -1,7 +1,6 @@
 
 import React, { Fragment } from "react";
 import { graphql, Link } from "gatsby";
-import Image from "gatsby-image";
 import Layout from "../components/layout";
 import ProductTypeLabel from "../components/product-type-label";
 import Cart from "../assets/cart.svg";

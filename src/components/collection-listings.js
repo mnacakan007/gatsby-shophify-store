@@ -8,8 +8,6 @@ export function CollectionListings({ collection }) {
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
   */
 
-  const newProducts = collection.products.filter(product => product.tags.length >= 1);
-
   collection.products.sort(function (a, b) {
     var productTypeA = a.productType.toUpperCase();
     var productTypeB = b.productType.toUpperCase();
