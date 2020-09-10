@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { graphql, Link } from 'gatsby';
-import Image from 'gatsby-image';
 import Layout from '../components/layout';
 import ProductTypeLabel from '../components/product-type-label';
 import Cart from '../assets/cart.svg';
@@ -9,6 +8,7 @@ import styles from '../styles/product-details.module.css';
 import SEO from '../components/seo';
 import { SizingChart } from '../components/sizing-chart';
 import { PasswordLock } from '../components/password-lock';
+import ProductPageThumbnail from '../components/product-page-thumbnail.js';
 
 import SelectArrow from '../components/select-arrow';
 import { useAccess } from '../context/access-context';
@@ -113,13 +113,13 @@ const Product = ({ product }) => {
               </dl>
             </details>
           ) : (
-            ' '
+            " "
           )}
 
           <form
             onSubmit={handleSubmit}
             className={`${styles.form} ${
-              needsSizing ? styles.needsSizing : ''
+              needsSizing ? styles.needsSizing : ""
             }`}
           >
             {needsSizing ? (
@@ -186,19 +186,16 @@ const Product = ({ product }) => {
               className={styles.productDetailsProductType}
             />
           )}
-          <Image
-            fluid={product.images[0].localFile.childImageSharp.fluid}
-            alt={product.title}
-          />
+          <ProductPageThumbnail images={product.images} />
         </div>
       </div>
-      {product.productType && product.productType === 'shirt' ? (
+      {product.productType && product.productType === "shirt" ? (
         <div className={styles.details}>
           <h2 className={styles.heading}>Sizing chart</h2>
           <SizingChart />
         </div>
       ) : (
-        ' '
+        " "
       )}
     </Fragment>
   );

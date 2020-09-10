@@ -1,0 +1,46 @@
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  display: grid;
+}
+
+.thumbnail > div {
+  grid-column: 1;
+  grid-row: 1;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.thumbnail > div.selected {
+  opacity: 1;
+}
+
+.gallery {
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  display: grid;
+  justify-content: flex-end;
+  grid-auto-flow: column;
+  grid-gap: 0.5em;
+  padding-right: 0.5em;
+  align-items: center;
+}
+
+.gallery button {
+  width: 45px;
+  height: auto;
+  appearance: none;
+  padding: 0;
+  border: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+}
+
+.gallery button:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.gallery button.selected {
+  border-color: white;
+}
