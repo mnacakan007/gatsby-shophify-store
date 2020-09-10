@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, navigate } from 'gatsby';
 import Image from 'gatsby-image';
+import New from "../assets/new.svg";
 
 import ProductTypeLabel from './product-type-label';
 import { useCart } from '../context/cart-context';
@@ -87,34 +88,46 @@ const BuyButton = ({ variants, slug, title }) => {
 
 const ProductCard = ({ product }) => {
 
+  const isNewProduct = product.tags?.includes("new");
+
   // don’t display products without images
   if (!product.variants[0]?.image?.localFile?.childImageSharp?.fluid) {
     return null;
   }
 
   return (
-    <div className={styles.card}>
+    <div className={styles.cardContainer}>
       <Link to={`/product/${product.slug}`} className={styles.cardLink}>
         <span className="sr-only">{product.title}</span>
       </Link>
-      <Image
-        fluid={product.variants[0]?.image?.localFile?.childImageSharp?.fluid}
-        alt={product.title}
-        className={styles.image}
-      />
-      <h3 className={styles.heading}>
-        {product.title}
-      </h3>
-      <p className={styles.description}>{product.description}</p>
-      <div className={styles.buttons}>
-        <div>
-          <BuyButton variants={product.variants} slug={product.slug} title={product.title} />
+      {isNewProduct && <img src={New} alt="" className={styles.new} />}
+      <div className={styles.card}>
+        <Image
+          fluid={product.variants[0]?.image?.localFile?.childImageSharp?.fluid}
+          alt={product.title}
+          className={styles.image}
+        />
+        <h3 className={styles.heading}>{product.title}</h3>
+        <p className={styles.description}>{product.description}</p>
+        <div className={styles.buttons}>
+          <div>
+            <BuyButton
+              variants={product.variants}
+              slug={product.slug}
+              title={product.title}
+            />
+          </div>
+          <span className={styles.details}>
+            Details <span aria-hidden="true">&rarr;</span>
+          </span>
         </div>
-        <span className={styles.details}>
-          Details <span aria-hidden="true">&rarr;</span>
-        </span>
+        {product.productType && (
+          <ProductTypeLabel
+            className={styles.label}
+            type={product.productType}
+          />
+        )}
       </div>
-      {product.productType && <ProductTypeLabel className={styles.label} type={product.productType} />}
     </div>
   );
 };

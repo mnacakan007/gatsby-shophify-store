@@ -8,9 +8,16 @@ export function CollectionListings({ collection }) {
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
   */
 
+  const newProducts = collection.products.filter(product => product.tags.length >= 1);
+
   collection.products.sort(function (a, b) {
     var productTypeA = a.productType.toUpperCase();
     var productTypeB = b.productType.toUpperCase();
+
+    /* Make sure New products are at the top of the list */
+    if (a.tags?.includes("new") || b.tags?.includes("new")) {
+      return -2;
+    }
     if (productTypeA > productTypeB) {
       return -1;
     }

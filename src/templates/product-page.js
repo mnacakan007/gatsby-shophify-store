@@ -80,7 +80,6 @@ const Product = ({ product }) => {
   });
 
   const getSizingChart = (product) => {
-    console.log(product);
     if (product === "shirt") {
       return <SizingChartShirts />;
     }
