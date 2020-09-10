@@ -60,8 +60,6 @@ const ProductPage = ({ data }) => {
   const price = formatPrice(firstVariant.priceV2.amount);
   const compareAtPrice = firstVariant.compareAtPriceV2 ? formatPrice(firstVariant.compareAtPriceV2.amount) : null;
 
-  console.log(product.metafields);
-
   const metafields = product.metafields.filter(field => {
     return field.key !== "Sizing Chart"
   });
@@ -71,6 +69,7 @@ const ProductPage = ({ data }) => {
   });
 
   const getSizingChart = (product) => {
+    console.log(product);
     if(product === "shirt") {
       return <SizingChartShirts />
     }
@@ -113,7 +112,7 @@ const ProductPage = ({ data }) => {
             <details className={styles.metafields}>
               <summary>Product details</summary>
               <dl>
-                {product.metafields.map((metafield) => {
+                {metafields.map((metafield) => {
                   return (
                     <Fragment>
                       <dt>{metafield.key}:</dt>
@@ -206,7 +205,7 @@ const ProductPage = ({ data }) => {
       {sizingChart.length > 0 ? (
         <div className={styles.details}>
           <h2 className={styles.heading}>Sizing chart</h2>
-          {getSizingChart(sizingChart.value)}
+          {getSizingChart(sizingChart[0].value)}
         </div>
       ) : (
         " "
