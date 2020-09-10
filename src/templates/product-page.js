@@ -1,3 +1,4 @@
+
 import React, { Fragment } from "react";
 import { graphql, Link } from "gatsby";
 import Image from "gatsby-image";
@@ -9,6 +10,7 @@ import styles from "../styles/product-details.module.css";
 import SEO from "../components/seo";
 import { SizingChartShirts, SizingChartJammies } from "../components/sizing-charts";
 import { PasswordLock } from "../components/password-lock";
+import ProductPageThumbnail from '../components/product-page-thumbnail.js';
 
 import SelectArrow from "../components/select-arrow";
 import { useAccess } from "../context/access-context";
@@ -204,10 +206,7 @@ const Product = ({ product }) => {
               className={styles.productDetailsProductType}
             />
           )}
-          <Image
-            fluid={product.images[0].localFile.childImageSharp.fluid}
-            alt={product.title}
-          />
+          <ProductPageThumbnail images={product.images} />
         </div>
       </div>
       {sizingChart.length > 0 ? (
