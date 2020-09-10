@@ -64,8 +64,6 @@ const BuyButton = ({ variants, slug, title }) => {
     )
   }
 
-  
-
   return (
     <div>
       <button ref={ref} className={styles.button} onClick={handleClick}>
