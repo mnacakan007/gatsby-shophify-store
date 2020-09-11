@@ -122,7 +122,7 @@ const Product = ({ product }) => {
               <dl>
                 {metafields.map((metafield) => {
                   return (
-                    <Fragment>
+                    <Fragment key={metafield.key}>
                       <dt>{metafield.key}:</dt>
                       <dd>{metafield.value}</dd>
                     </Fragment>
