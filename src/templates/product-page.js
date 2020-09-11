@@ -1,7 +1,6 @@
 
 import React, { Fragment } from "react";
 import { graphql, Link } from "gatsby";
-import Image from "gatsby-image";
 import Layout from "../components/layout";
 import ProductTypeLabel from "../components/product-type-label";
 import Cart from "../assets/cart.svg";
@@ -80,7 +79,6 @@ const Product = ({ product }) => {
   });
 
   const getSizingChart = (product) => {
-    console.log(product);
     if (product === "shirt") {
       return <SizingChartShirts />;
     }
@@ -124,7 +122,7 @@ const Product = ({ product }) => {
               <dl>
                 {metafields.map((metafield) => {
                   return (
-                    <Fragment>
+                    <Fragment key={metafield.key}>
                       <dt>{metafield.key}:</dt>
                       <dd>{metafield.value}</dd>
                     </Fragment>

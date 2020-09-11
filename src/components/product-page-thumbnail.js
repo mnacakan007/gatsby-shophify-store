@@ -14,6 +14,7 @@ const ProductPageThumbnail = ({ images }) => {
               <Image
                 fluid={image.localFile.childImageSharp.fluid}
                 className={index === selected ? styles.selected : ""}
+                key={index}
               />
             );
           })}
@@ -24,8 +25,10 @@ const ProductPageThumbnail = ({ images }) => {
               <button
                 onClick={() => setSelected(index)}
                 className={index === selected ? styles.selected : ""}
+                key={index}
               >
-                <Image fluid={image.localFile.childImageSharp.fluid} />
+                <Image fluid={image.localFile.childImageSharp.fluid}
+                key={index} />
               </button>
             );
           })}

@@ -19,6 +19,7 @@ export const query = graphql`
           slug
           productType
           description
+          tags
           variants {
             shopifyId
             title

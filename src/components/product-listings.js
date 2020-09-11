@@ -7,7 +7,7 @@ export function ProductListings({ products }) {
   return (
     <div className={styles.container}>
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard key={product.id} product={product} new={product.tags?.includes("new")} />
       ))}
     </div>
   );

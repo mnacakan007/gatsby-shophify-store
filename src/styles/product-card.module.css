@@ -1,3 +1,21 @@
+.cardContainer {
+  position: relative;
+}
+
+.new {
+  position: absolute;
+  top: -1.5em;
+  left: -1.5em;
+  pointer-events: none;
+  z-index: 4;
+}
+
+@media (max-width: 37.5rem) {
+  .new {
+    left: 0.5em;
+  }
+}
+
 .card {
   --padding: 1em;
   position: relative;
@@ -10,6 +28,7 @@
   justify-content: flex-start;
   overflow: hidden;
   padding: var(--padding);
+  height: 100%;
 }
 
 .card::before {
@@ -30,7 +49,7 @@
   z-index: 2;
 }
 
-.card:hover::before {
+.cardContainer:hover .card::before {
   animation: shine 0.75s;
 }
 
