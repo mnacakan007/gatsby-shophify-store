@@ -54,13 +54,13 @@ export const query = graphql`
   }
 `;
 
-const promoProductsCollection = "1-million-devs-swag";
 const allProductsCollection = "netlify-swag-store";
+const soldOutProductsCollection = "done-but-not-forgotten-a-netlify-swag-retrospective"
 
 export default ({ data }) => {
-  const promotionalProducts = data.allShopifyCollection.nodes.filter(
+  const soldOutProducts = data.allShopifyCollection.nodes.filter(
     (node) => {
-      return node.handle === promoProductsCollection;
+      return node.handle === soldOutProductsCollection;
     }
   );
   
@@ -76,10 +76,9 @@ export default ({ data }) => {
       <SEO />
       {/* <PromotionalBanner /> */}
       <HomeIntro title={title} body={body} />
-      <div id="promo">
-        <CollectionListings collection={promotionalProducts[0]} />
-      </div>
       <CollectionListings collection={allProducts[0]} />
+
+      <CollectionListings collection={soldOutProducts[0]} />
     </Layout>
   );
 };
