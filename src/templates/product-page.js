@@ -73,8 +73,6 @@ const Product = ({ product }) => {
     ? formatPrice(firstVariant.compareAtPriceV2.amount)
     : null;
 
-  console.log(compareAtPrice);
-
   const metafields = product.metafields.filter((field) => {
     return field.key !== "Sizing Chart";
   });
