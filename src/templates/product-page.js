@@ -42,6 +42,9 @@ export const query = graphql`
           amount
           currencyCode
         }
+        compareAtPriceV2 {
+          amount
+        }
         title
       }
       productType
@@ -69,6 +72,8 @@ const Product = ({ product }) => {
   const compareAtPrice = firstVariant.compareAtPriceV2
     ? formatPrice(firstVariant.compareAtPriceV2.amount)
     : null;
+
+  console.log(compareAtPrice);
 
   const metafields = product.metafields.filter((field) => {
     return field.key !== "Sizing Chart";
