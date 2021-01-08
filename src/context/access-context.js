@@ -12,7 +12,8 @@ export const AccessProvider = ({ children }) => {
   );
 };
 
-export const useAccess = () => {
+export const useAccess = (collection) => {
+
   const { access, setAccess } = useContext(AccessContext);
 
   const initializeSetting = ({
@@ -46,7 +47,7 @@ export const useAccess = () => {
 
   useEffect(() => {
     initializeSetting({
-      localStorageKey: 'swag.netlify.com:netlify-exclusive',
+      localStorageKey: `swag.netlify.com:${collection}`,
       setValue: setAccess,
       value: access,
       fallbackValue: false,
@@ -54,7 +55,7 @@ export const useAccess = () => {
   }, [access, setAccess]);
 
   const updateAccess = (newAccess) => {
-    localStorage.setItem('swag.netlify.com:netlify-exclusive', newAccess);
+    localStorage.setItem(`swag.netlify.com:${collection}`, newAccess);
     setAccess(newAccess);
   };
 

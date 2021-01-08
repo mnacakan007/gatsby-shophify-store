@@ -223,12 +223,12 @@ const Product = ({ product }) => {
 };
 
 const ProductPage = ({ data }) => {
-  const { access, updateAccess } = useAccess();
   const collection = data.shopifyCollection.handle;
+  const { access, updateAccess } = useAccess(collection);
   const product = data.shopifyProduct;
 
   // TODO centralize which collections are exclusive
-  const isProtectedCollection = ["netlify-exclusive"].includes(collection);
+  const isProtectedCollection = ["netlify-exclusive", "build-plugin-swag-kit"].includes(collection);
 
   return (
     <Layout>
