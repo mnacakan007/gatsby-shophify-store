@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../styles/password-lock.module.css';
 
-export function PasswordLock({ handleCorrectPassword }) {
+export function PasswordLock({ handleCorrectPassword, passwordVariable }) {
   const [password, setPassword] = useState('');
 
   return (
@@ -13,7 +13,7 @@ export function PasswordLock({ handleCorrectPassword }) {
         async function checkPassword(password) {
           const { allowed } = await fetch('/.netlify/functions/check-secret', {
             method: 'POST',
-            body: JSON.stringify({ password }),
+            body: JSON.stringify({ password, passwordVariable }),
           }).then((response) => response.json());
 
           if (!allowed) {

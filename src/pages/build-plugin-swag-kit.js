@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
-import { HomeIntro } from '../components/home-intro';
 import { CollectionListings } from '../components/collection-listings';
 import { PasswordLock } from '../components/password-lock';
 import SEO from '../components/seo';
@@ -9,7 +8,7 @@ import { useAccess } from '../context/access-context';
 
 export const query = graphql`
   {
-    shopifyCollection(handle: { eq: "netlify-exclusive" }) {
+    shopifyCollection(handle: { eq: "build-plugin-swag-kit" }) {
       descriptionHtml
       handle
       title
@@ -45,32 +44,27 @@ export const query = graphql`
         }
       }
     }
-    shopifyPage(handle: { eq: "netlify-exclusive-swag" }) {
-      body
-      title
-    }
   }
 `;
 
 export default ({ data }) => {
   const { access, updateAccess } = useAccess(data.shopifyCollection.handle);
-  const { title, body } = data.shopifyPage;
 
   return (
     <Layout home>
       <SEO
         metadata={{
-          title,
-          description: 'Swag that’s only available to Netlify team members.',
+          title: 'Build Plugin Swag Kit',
+          description: 'Swag that’s only available to Build Plugin Creators.',
         }}
       />
+
       {access ? (
         <>
-          <HomeIntro title={title} body={body} />
           <CollectionListings collection={data.shopifyCollection} />
         </>
       ) : (
-        <PasswordLock handleCorrectPassword={() => updateAccess(true)} passwordVariable='EXCLUSIVE_PASSWORD' />
+        <PasswordLock handleCorrectPassword={() => updateAccess(true)} passwordVariable='BUILD_PLUGIN_SWAG_KIT_PASSWORD' />
       )}
     </Layout>
   );

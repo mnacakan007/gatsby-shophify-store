@@ -1,7 +1,7 @@
 exports.handler = async (event) => {
-  const { password } = JSON.parse(event.body);
+  const { password, passwordVariable } = JSON.parse(event.body);
 
-  if (password === process.env.EXCLUSIVE_PASSWORD) {
+  if (password === process.env[passwordVariable]) {
     return {
       statusCode: 200,
       body: JSON.stringify({ allowed: true }),
