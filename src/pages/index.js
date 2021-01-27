@@ -48,9 +48,9 @@ export const query = graphql`
       }
     }
     shopifyPage(handle: {eq: "netlify-swag-for-all"}) {
-    body
-    title
-  }
+      body
+      title
+    }
   }
 `;
 

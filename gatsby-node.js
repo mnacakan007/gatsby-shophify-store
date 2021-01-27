@@ -40,6 +40,11 @@ exports.createPages = async ({ graphql, actions }) => {
           bodySummary
         }
       }
+      shopifyCollection(handle: {eq: "netlify-swag-store"}) {
+        products {
+          productType
+        }
+      }
     }
   `);
 
@@ -72,6 +77,19 @@ exports.createPages = async ({ graphql, actions }) => {
       component: require.resolve("./src/templates/page.js"),
       context: {
         pageHandle: page.handle,
+      },
+    });
+  })
+
+  const productTypes = [... new Set(result.data.shopifyCollection.products.map(product => product.productType))]
+
+  productTypes.forEach(type => {
+    const slug = slugify(type, { lower: true });
+    actions.createPage({
+      path: `/products/${slug}`,
+      component: require.resolve("./src/templates/product-type-page.js"),
+      context: {
+        productType: type,
       },
     });
   })
