@@ -20,8 +20,8 @@ export function CollectionListings({ collection, collectionTitle, filters }) {
     if(a.tags?.includes("new") > b.tags?.includes("new")) return -1;
     if(a.tags?.includes("new") < b.tags?.includes("new")) return 1;
 
-    if(productTypeA > productTypeB) return -1;
-    if(productTypeA < productTypeB) return 1;
+    if(productTypeA > productTypeB) return 1;
+    if(productTypeA < productTypeB) return -1;
 
     return 0;
   });
