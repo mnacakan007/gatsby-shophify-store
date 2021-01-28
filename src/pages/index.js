@@ -74,8 +74,6 @@ export default ({ data }) => {
 
   const productFilters = allProducts[0].products.map(product => product.productType);
 
-  console.log(productFilters);
-  
   return (
     <Layout home>
       <SEO />

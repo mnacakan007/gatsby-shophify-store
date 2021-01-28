@@ -13,24 +13,22 @@ export function CollectionListings({ collection, collectionTitle, filters }) {
   const title = collectionTitle || collection.title;
 
   products.sort(function (a, b) {
+
     var productTypeA = a.productType.toUpperCase();
     var productTypeB = b.productType.toUpperCase();
 
-    /* Make sure New products are at the top of the list */
-    if (a.tags?.includes("new") || b.tags?.includes("new")) {
-      return -2;
-    }
-    if (productTypeA > productTypeB) {
-      return -1;
-    }
-    if (productTypeA < productTypeB) {
-      return 1;
-    }
+    if(a.tags?.includes("new") > b.tags?.includes("new")) return -1;
+    if(a.tags?.includes("new") < b.tags?.includes("new")) return 1;
+
+    if(productTypeA > productTypeB) return -1;
+    if(productTypeA < productTypeB) return 1;
 
     return 0;
   });
 
-  const productFilters = [... new Set(filters)];
+  const productFilters = [...new Set(filters)];
+
+  productFilters.sort();
 
   return (
     <Fragment>
@@ -42,7 +40,7 @@ export function CollectionListings({ collection, collectionTitle, filters }) {
           </li>
           {productFilters.map(filter => (
             <li key={filter}>
-              <Link to={"/products/" + filter} activeClassName={styles.active}>{filter}</Link>
+              <Link to={"/products/" + filter.toLowerCase()} activeClassName={styles.active}>{filter}</Link>
             </li>
           ))}
         </ul>
