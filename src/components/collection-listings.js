@@ -4,33 +4,27 @@ import styles from "../styles/collection-listings.module.css";
 import { Link } from 'gatsby';
 
 export function CollectionListings({ collection, collectionTitle, filters }) {
-  /*
-    Group items by productType in DESC order
-    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-  */
-
   const products = collection.products || collection;
   const title = collectionTitle || collection.title;
 
   products.sort(function (a, b) {
     /*
-      Collection are sorted by new products first and grouped by product type
+      Push `new` products at the top of the list
     */
-
-    var productTypeA = a.productType.toUpperCase();
-    var productTypeB = b.productType.toUpperCase();
-
     if(a.tags?.includes("new") > b.tags?.includes("new")) return -1;
     if(a.tags?.includes("new") < b.tags?.includes("new")) return 1;
-
-    if(productTypeA > productTypeB) return 1;
-    if(productTypeA < productTypeB) return -1;
 
     return 0;
   });
 
-  const productFilters = [...new Set(filters)];
+  /*
+    We need to do this magically beautiful process
+    because we want "Apparel" to appear first and then sort ASC
+  */
+  let productFilters = [...new Set(filters)];
+  productFilters = productFilters.filter(filter => filter !== "Apparel");
   productFilters.sort();
+  productFilters.unshift("Apparel");
 
   return (
     <Fragment>
