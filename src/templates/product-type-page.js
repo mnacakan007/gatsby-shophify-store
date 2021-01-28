@@ -67,7 +67,11 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout home>
-      <SEO />
+      <SEO
+        metadata={{
+          title: productType,
+        }}
+      />
       <HomeIntro title={title} body={body} />
       <CollectionListings collection={products} collectionTitle={productType} filters={productFilters} />
     </Layout>

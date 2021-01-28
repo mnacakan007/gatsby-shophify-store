@@ -13,6 +13,9 @@ export function CollectionListings({ collection, collectionTitle, filters }) {
   const title = collectionTitle || collection.title;
 
   products.sort(function (a, b) {
+    /*
+      Collection are sorted by new products first and grouped by product type
+    */
 
     var productTypeA = a.productType.toUpperCase();
     var productTypeB = b.productType.toUpperCase();
@@ -27,7 +30,6 @@ export function CollectionListings({ collection, collectionTitle, filters }) {
   });
 
   const productFilters = [...new Set(filters)];
-
   productFilters.sort();
 
   return (
