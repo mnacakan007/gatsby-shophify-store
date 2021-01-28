@@ -63,11 +63,13 @@ export default ({ data, pageContext }) => {
     }
   );
 
+  const productFilters = data.shopifyCollection.products.map(product => product.productType);
+
   return (
     <Layout home>
       <SEO />
       <HomeIntro title={title} body={body} />
-      <CollectionListings collection={products} collectionTitle={productType} />
+      <CollectionListings collection={products} collectionTitle={productType} filters={productFilters} />
     </Layout>
   );
 };

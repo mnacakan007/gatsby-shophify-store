@@ -3,7 +3,7 @@ import { ProductListings } from "../components/product-listings";
 import styles from "../styles/collection-listings.module.css";
 import { Link } from 'gatsby';
 
-export function CollectionListings({ collection, collectionTitle }) {
+export function CollectionListings({ collection, collectionTitle, filters }) {
   /*
     Group items by productType in DESC order
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
@@ -30,20 +30,23 @@ export function CollectionListings({ collection, collectionTitle }) {
     return 0;
   });
 
+  const productFilters = [... new Set(filters)];
+
   return (
     <Fragment>
       <h2 className={styles.heading}>{title}</h2>
-      <ul className={styles.filters}>
-        <li>
-          <Link to="/" activeClassName={styles.active}>All</Link>
-        </li>
-        <li>
-          <Link to="/products/shirt" activeClassName={styles.active}>Shirt</Link>
-        </li>
-        <li>
-          <Link to="/products/stickers" activeClassName={styles.active}>Stickers</Link>
-        </li>
-      </ul>
+      {productFilters.length > 1 && (
+        <ul className={styles.filters}>
+          <li>
+            <Link to="/" activeClassName={styles.active}>All</Link>
+          </li>
+          {productFilters.map(filter => (
+            <li key={filter}>
+              <Link to={"/products/" + filter} activeClassName={styles.active}>{filter}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
       <ProductListings products={products} />
     </Fragment>
   );
