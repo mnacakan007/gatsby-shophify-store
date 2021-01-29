@@ -4,8 +4,8 @@
 
 .new {
   position: absolute;
-  top: -1.5em;
-  left: -1.5em;
+  top: -1em;
+  left: -1em;
   pointer-events: none;
   z-index: 4;
 }
