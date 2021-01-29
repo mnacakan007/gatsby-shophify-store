@@ -6,4 +6,37 @@
   margin-bottom: 2rem;
   margin-top: 4rem;
   text-align: center;
+  text-transform: capitalize;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-bottom: 3em;
+  flex-wrap: wrap;
+  padding: 0 0.5em;
+}
+
+.filters li {
+  margin: 0.5em;
+}
+
+.filters a {
+  display: block;
+  color: var(--color-white);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.25em;
+  border-radius: 4px;
+  padding: 0.25em 0.5em;
+}
+
+.filters a:hover {
+  text-decoration: underline;
+}
+
+.filters a.active {
+  background-color: var(--color-white);
+  color: var(--color-black);
 }

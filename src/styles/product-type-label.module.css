@@ -11,22 +11,21 @@
   text-transform: capitalize;
 }
 
-.label[data-type='stickers'] {
-  background: var(--color-blue-dark);
+.label[data-type='Housewares'] {
+  background: #135B8B;
 }
 
-.label[data-type='shirt'] {
-  background: var(--color-pink-dark);
+.label[data-type='Accessories'] {
+  background: #AF0D3B;
 }
 
-.label[data-type='mug'] {
-  background: var(--color-orange-dark);
+.label[data-type='Apparel'] {
+  background: #0F615C;
 }
 
-.label[data-type='lapel pin'] {
-  background: var(--color-violet-dark);
+.label[data-type='Stickers'] {
+  background: #7C0C64;
 }
 
-.label[data-type='socks'] {
-  background: var(--color-yellow-dark);
-}
+
+

@@ -48,9 +48,9 @@ export const query = graphql`
       }
     }
     shopifyPage(handle: {eq: "netlify-swag-for-all"}) {
-    body
-    title
-  }
+      body
+      title
+    }
   }
 `;
 
@@ -71,12 +71,15 @@ export default ({ data }) => {
   );
 
   const { title, body } = data.shopifyPage;
+
+  const productFilters = allProducts[0].products.map(product => product.productType);
+
   return (
     <Layout home>
       <SEO />
       {/* <PromotionalBanner /> */}
       <HomeIntro title={title} body={body} />
-      <CollectionListings collection={allProducts[0]} />
+      <CollectionListings collection={allProducts[0]} filters={productFilters} />
 
       <CollectionListings collection={soldOutProducts[0]} />
     </Layout>
