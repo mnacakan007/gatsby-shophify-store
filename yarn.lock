@@ -1428,6 +1428,9 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@netlify/community-nav@file:../netlify-component-communitynav":
+  version "1.0.2"
+
 "@netlify/community-nav@github:netlify/netlify-ui-community-nav#v1.0.2":
   version "1.0.2"
   resolved "https://codeload.github.com/netlify/netlify-ui-community-nav/tar.gz/13cc0964baeb840b95b1f0fd7c5c8b9560a3227b"
