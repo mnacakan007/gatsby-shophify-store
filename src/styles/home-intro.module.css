@@ -8,8 +8,10 @@
 .heading {
   color: var(--color-white);
   font-family: var(--font-display);
+  font-feature-settings: "salt" 1;
+  letter-spacing: -.02em;
+  font-weight: 680;
   font-size: 3.5rem;
-  font-weight: 400;
   margin-bottom: 2rem;
   margin-top: 4rem;
   text-align: center;
