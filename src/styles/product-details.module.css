@@ -1,7 +1,9 @@
 .heading {
   color: var(--color-black);
   font-family: var(--font-display);
-  font-weight: 400;
+  font-feature-settings: "salt" 1;
+  letter-spacing: -.02em;
+  font-weight: 680;
   font-size: 2.5em;
   margin: 0.5em 0 0.2em 0;
   line-height: 1.1;

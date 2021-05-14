@@ -42,13 +42,6 @@ module.exports = {
         trackingId: "UA-42258181-24",
       },
     },
-    {
-      resolve: "gatsby-plugin-google-fonts",
-      options: {
-        fonts: ["roboto:400,700"],
-        display: "swap",
-      },
-    },
   ],
   siteMetadata: {
     title: "Netlify Store - Awesome Apparel, Stickers, and Other Swag",
