@@ -35,8 +35,8 @@ const Header = () => {
               <a href="https://www.netlify.com/community/" className="ncn-menulink ncn-menulink-community">Community</a>
               <a href="https://answers.netlify.com/" className="ncn-menulink ncn-menulink-forums">Support Forums</a>
               <a href="https://explorers.netlify.com/" className="ncn-menulink ncn-menulink-explorers">Learning Platform</a>
-              <a href="https://remotelyinteresting.transistor.fm/" className="ncn-menulink ncn-menulink-podcast" aria-current="page">Podcast</a>
-              <a href="https://swag.netlify.com/" className="ncn-menulink ncn-menulink-swag">Swag</a>
+              <a href="https://remotelyinteresting.transistor.fm/" className="ncn-menulink ncn-menulink-podcast">Podcast</a>
+              <a href="https://swag.netlify.com/" className="ncn-menulink ncn-menulink-swag" aria-current="page">Swag</a>
             </nav>
           </details>
         </header>
