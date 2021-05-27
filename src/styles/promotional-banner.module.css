@@ -18,8 +18,10 @@
 
 .heading {
   font-family: var(--font-display);
+  font-feature-settings: "salt" 1;
+  letter-spacing: -.02em;
+  font-weight: 680;
   font-size: clamp(2em, 4vw, 3.1em);
-  font-weight: 400;
   line-height: 1;
   margin-top: 0.1em;
 }
