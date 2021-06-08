@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from "react-helmet";
 import Cart from './cart';
-import Nav from "@netlify/marketing-community-nav";
+import Nav from "@netlify/marketing-community-nav/nav.js";
 
 const Header = () => {
   return (
