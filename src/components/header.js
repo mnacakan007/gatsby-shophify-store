@@ -32,14 +32,14 @@ const Header = () => {
             data-close-esc
             data-modal="(max-width: 39.9375em)">
             <summary>
-              <a href="/" className="ncn-menu-hed" aria-current="page">Swag</a>
+              <a href="/" className="ncn-menu-hed">Swag</a>
             </summary>
             <nav className="ncn-menu-c" data-close-click-outside-curtain>
               <a href="https://www.netlify.com/community/" className="ncn-menulink ncn-menulink-community">Community</a>
               <a href="https://answers.netlify.com/" className="ncn-menulink ncn-menulink-forums">Support Forums</a>
               <a href="https://explorers.netlify.com/" className="ncn-menulink ncn-menulink-explorers">Learning Platform</a>
               <a href="https://remotelyinteresting.netlify.com/" className="ncn-menulink ncn-menulink-podcast">Podcast</a>
-              <a href="https://swag.netlify.com/" className="ncn-menulink ncn-menulink-swag" aria-current="page">Swag</a>
+              <a href="https://swag.netlify.com/" className="ncn-menulink ncn-menulink-swag">Swag</a>
             </nav>
           </details>
         </header>
