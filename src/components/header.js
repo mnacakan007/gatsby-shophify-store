@@ -9,7 +9,7 @@ const Header = () => {
       <Helmet>
         <link rel="preconnect" href="https://netlify-ui-community-nav.netlify.app/"></link>
       </Helmet>
-      <netlify-ui-community-nav class="ncn" version="1.0">
+      <netlify-ui-community-nav class="ncn" version="1.0.9">
         <header className="ncn-header">
           <a href="https://www.netlify.com/" className="ncn-home">
             <svg className="ncn-home-logo" viewBox="0 0 147 40" width="147" height="40" aria-hidden="true" focusable="false">
@@ -27,15 +27,18 @@ const Header = () => {
             <span className="ncn-visual-hidden">Home</span>
           </a>
           <details className="ncn-menu"
-            data-close-click-outside
+            data-close-click-outside="(max-width: 63.1875em)"
+            data-force-state-closed="(max-width: 63.1875em)"
             data-close-esc
             data-modal="(max-width: 39.9375em)">
-            <summary><div className="ncn-menu-hed">Swag</div></summary>
+            <summary>
+              <a href="/" className="ncn-menu-hed" aria-current="page">Swag</a>
+            </summary>
             <nav className="ncn-menu-c" data-close-click-outside-curtain>
               <a href="https://www.netlify.com/community/" className="ncn-menulink ncn-menulink-community">Community</a>
               <a href="https://answers.netlify.com/" className="ncn-menulink ncn-menulink-forums">Support Forums</a>
               <a href="https://explorers.netlify.com/" className="ncn-menulink ncn-menulink-explorers">Learning Platform</a>
-              <a href="https://remotelyinteresting.transistor.fm/" className="ncn-menulink ncn-menulink-podcast">Podcast</a>
+              <a href="https://remotelyinteresting.netlify.com/" className="ncn-menulink ncn-menulink-podcast">Podcast</a>
               <a href="https://swag.netlify.com/" className="ncn-menulink ncn-menulink-swag" aria-current="page">Swag</a>
             </nav>
           </details>

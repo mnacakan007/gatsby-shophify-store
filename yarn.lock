@@ -1428,10 +1428,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@netlify/marketing-community-nav@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.npmjs.org/@netlify/marketing-community-nav/-/marketing-community-nav-1.0.8.tgz"
-  integrity sha512-eFLbPYQRwTmdeq1axCfPERB1TZ61uIvLsQZ72enY1GudaEl0ivc+a5bjjXdTYxxPzeMAf7oCBhWZCB8FTqVZEQ==
+"@netlify/marketing-community-nav@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@netlify/marketing-community-nav/-/marketing-community-nav-1.0.9.tgz#42d43f90e76ef7b33f0cb38942e7b0f21e21d162"
+  integrity sha512-k+jd9XSAhTcv26KIR9XpcPSDwkxpWyigqOhuxzyWKZhzb2y627lzdMEMZ/vD8eGiVNXl4gnOWaWGdY4U4o0Sjw==
 
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"
