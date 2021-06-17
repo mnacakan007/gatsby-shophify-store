@@ -9,7 +9,7 @@ const Header = () => {
       <Helmet>
         <link rel="preconnect" href="https://netlify-ui-community-nav.netlify.app/"></link>
       </Helmet>
-      <netlify-ui-community-nav class="ncn" version="1.0.9">
+      <netlify-ui-community-nav class="ncn" version="1.0.10">
         <header className="ncn-header">
           <a href="https://www.netlify.com/" className="ncn-home">
             <svg className="ncn-home-logo" viewBox="0 0 147 40" width="147" height="40" aria-hidden="true" focusable="false">
