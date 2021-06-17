@@ -8,6 +8,7 @@ https://swag.netlify.com
 
 - clone the repo
 - install dependencies by running `yarn`
+- Create an `.env.development` file. See `.env.development.TEMPLATE` for an example.
 - start the development server and watcher with `yarn develop`
 - visit `http://localhost:8000/`
 

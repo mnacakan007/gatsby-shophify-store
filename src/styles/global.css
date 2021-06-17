@@ -11,6 +11,8 @@
   font-display: swap;
 }
 
+@import '~@netlify/marketing-community-nav/nav.css';
+
 :root {
   /* Brand color */
   --color-teal: #00ad9f;

@@ -150,7 +150,7 @@
   box-shadow: 0 2px 4px rgba(14, 30, 37, 0.24);
   font-size: 1rem;
   font-weight: 700;
-  position: absolute;
+  position: fixed;
   padding: 16px 1rem 16px;
   right: 2rem;
   top: 0;
