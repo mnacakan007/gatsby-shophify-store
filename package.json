@@ -37,5 +37,8 @@
     "shopify-buy": "^2.11.0",
     "slugify": "^1.4.4",
     "xstate": "^4.11.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
   }
 }

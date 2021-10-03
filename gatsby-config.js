@@ -1,6 +1,4 @@
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
+require('dotenv').config();
 
 module.exports = {
   plugins: [
@@ -29,9 +27,9 @@ module.exports = {
     {
       resolve: "gatsby-source-shopify",
       options: {
-        shopName: "netlify",
-        // get this: https://netlify.myshopify.com/admin/apps/private
-        accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_API_TOKEN,
+        shopName: "botas-store",
+        // get this: https://botas-store.myshopify.com/admin/apps/private
+        accessToken: "3b201c333805db3d10d2b4f029a640ba",
         apiVersion: "2020-01",
         includeCollections: ["shop", "content"],
       },

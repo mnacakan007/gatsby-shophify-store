@@ -1,6 +1,6 @@
 
 import React, { Fragment } from "react";
-import { graphql, Link } from "gatsby";
+import {graphql, Link} from "gatsby";
 import Layout from "../components/layout";
 import ProductTypeLabel from "../components/product-type-label";
 import Cart from "../assets/cart.svg";
@@ -14,43 +14,43 @@ import ProductPageThumbnail from '../components/product-page-thumbnail.js';
 import SelectArrow from "../components/select-arrow";
 import { useAccess } from "../context/access-context";
 
-export const query = graphql`
-  query($productID: String) {
-    shopifyCollection(products: { elemMatch: { id: { eq: $productID } } }) {
-      handle
-    }
-    shopifyProduct(id: { eq: $productID }) {
-      title
-      description
-      images {
-        localFile {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-      metafields {
-        value
-        key
-      }
-      variants {
-        shopifyId
-        availableForSale
-        priceV2 {
-          amount
-          currencyCode
-        }
-        compareAtPriceV2 {
-          amount
-        }
-        title
-      }
-      productType
-    }
-  }
-`;
+// export const query = graphql`
+//   query($productID: String) {
+//     shopifyCollection(products: { elemMatch: { id: { eq: $productID } } }) {
+//       handle
+//     }
+//     shopifyProduct(id: { eq: $productID }) {
+//       title
+//       description
+//       images {
+//         localFile {
+//           childImageSharp {
+//             fluid {
+//               ...GatsbyImageSharpFluid
+//             }
+//           }
+//         }
+//       }
+//       metafields {
+//         value
+//         key
+//       }
+//       variants {
+//         shopifyId
+//         availableForSale
+//         priceV2 {
+//           amount
+//           currencyCode
+//         }
+//         compareAtPriceV2 {
+//           amount
+//         }
+//         title
+//       }
+//       productType
+//     }
+//   }
+// `;
 
 const formatPrice = (amount, currency = "USD") => {
   return new Intl.NumberFormat("en-US", {
@@ -89,7 +89,7 @@ const Product = ({ product }) => {
       return <SizingChartJammies />;
     }
   };
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
 

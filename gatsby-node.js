@@ -1,53 +1,39 @@
 const slugify = require('slugify');
 
-exports.createResolvers = ({ createResolvers }) => {
+exports.createResolvers = ({createResolvers}) => {
   createResolvers({
     ShopifyProduct: {
       slug: {
         type: 'String',
         resolve(source) {
-          return slugify(source.title, { lower: true });
+          return slugify(source.title, {lower: true});
         },
       },
     },
   });
 };
 
-exports.createPages = async ({ graphql, actions }) => {
+exports.createPages = async ({graphql, actions}) => {
   const result = await graphql(`
     {
       allShopifyProduct {
         nodes {
-          id
-          slug
+          title
           images {
+            id
             localFile {
               childImageSharp {
                 fluid {
-                  src
+                  srcSet
                 }
               }
             }
           }
         }
       }
-      allShopifyPage(filter: { handle: { ne: "netlify-swag-for-all" } }) {
-        nodes {
-          id
-          handle
-          title
-          body
-          bodySummary
-        }
-      }
-      shopifyCollection(handle: {eq: "netlify-swag-store"}) {
-        products {
-          productType
-        }
-      }
-    }
+  }
   `);
-
+  console.log(result.data.allShopifyProduct);
   const products = result.data.allShopifyProduct.nodes;
 
   products.forEach((product) => {
@@ -69,29 +55,29 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  const pages = result.data.allShopifyPage.nodes;
+  // const pages = result.data.allShopifyPage.nodes;
+  //
+  // pages.forEach(page => {
+  //   actions.createPage({
+  //     path: `/pages/${page.handle}`,
+  //     component: require.resolve("./src/templates/page.js"),
+  //     context: {
+  //       pageHandle: page.handle,
+  //     },
+  //   });
+  // })
 
-  pages.forEach(page => {
-    actions.createPage({
-      path: `/pages/${page.handle}`,
-      component: require.resolve("./src/templates/page.js"),
-      context: {
-        pageHandle: page.handle,
-      },
-    });
-  })
+  // const productTypes = [...new Set(result.data.shopifyCollection.products.map(product => product.productType))]
 
-  const productTypes = [... new Set(result.data.shopifyCollection.products.map(product => product.productType))]
-
-  productTypes.forEach(type => {
-    const slug = slugify(type, { lower: true });
-    actions.createPage({
-      path: `/products/${slug}`,
-      component: require.resolve("./src/templates/product-type-page.js"),
-      context: {
-        productType: type,
-      },
-    });
-  })
+  // productTypes.forEach(type => {
+  //   const slug = slugify(type, {lower: true});
+  //   actions.createPage({
+  //     path: `/products/${slug}`,
+  //     component: require.resolve("./src/templates/product-type-page.js"),
+  //     context: {
+  //       productType: type,
+  //     },
+  //   });
+  // })
 
 };
